@@ -79,4 +79,4 @@ This project is licensed under the [GNU License](LICENSE).
 
 ## 🏷 Tags
 
-#BloodBank #HealthcareTech #DatabaseManagement #WebApp #GBGChallenge #MedicalInnovation #BloodDonation #DonorManagement #HospitalManagement #FullStackDevelopment #HealthTech #EmergencyServices #DataManagement #CommunitySupport #HealthcareAccess #OpenSource #HealthcareInnovation
+`#BloodBank` `#HealthcareTech` `#DatabaseManagement` `#WebApp` `#GBGChallenge` `#MedicalInnovation` `#BloodDonation` `#DonorManagement` `#HospitalManagement` `#FullStackDevelopment` `#HealthTech` `#EmergencyServices` `#DataManagement` `#CommunitySupport` `#HealthcareAccess` `#OpenSource` `#HealthcareInnovation`
