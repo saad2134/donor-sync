@@ -23,12 +23,14 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/saad2134/donor-sync.git```
+   git clone https://github.com/saad2134/donor-sync.git
+   ```
    
 3. Navigate to the project directory:
 
    ```bash
-   cd donor-sync```
+   cd donor-sync
+   ```
    
 4. Open index.html in your preferred browser.
 
