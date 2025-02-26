@@ -11,14 +11,22 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 - *🔒 User Access*: Secure access for hospitals, donors, and partner organizations.
 - *⚡ Efficiency*: Reduces delays in emergency cases through an automated system.
 
+## 📊 Usage
 
-## 🛠 Tech Stack
+1. *Patients*: Register and request for specific blood types.
+2. *Donors*: Register and find places where blood is needed.
+3. *Hospitals*: Request blood directly from registered donors.
+4. *Organizations*: Manage donation drives and support patients.
+
+## 🛠 Tech Stack *
 
 - HTML, CSS, JavaScript
+- React + NextJS
+- shadcn/ui for UI components
 - Database Management System - PostgresQL
 
 
-## 📥 Installation
+## 📥 Installation *
 
 1. Clone the repository:
 
@@ -34,7 +42,7 @@ A comprehensive web-based platform that connects blood donors directly with hosp
    
 4. Open index.html in your preferred browser.
 
-## ▶ Run the Project
+## ▶ Run the Project *
 
 If you are using a local server (e.g., with Python):
 
@@ -52,15 +60,6 @@ If you are using a local server (e.g., with Python):
    
 
 3. Open `http://localhost:8000` in your browser.
-
-
-## 📊 Usage
-
-1. *Patients*: Register and request for specific blood types.
-2. *Donors*: Register and find places where blood is needed.
-3. *Hospitals*: Request blood directly from registered donors.
-4. *Organizations*: Manage donation drives and support patients.
-
 
 ## 🤝 Contributing
 
