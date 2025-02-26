@@ -73,10 +73,10 @@ Contributions are welcome! If you find any bugs or have feature requests, please
 
 ## 👥 Team Members
 
- **Fareed Ahmed Owais**
- **Mohammed Saad Uddin**
- **Abdur Rahman Qasim**
- **Mohammed Abdul Rahman**
+- [**Fareed Ahmed Owais**](https://github.com/FareedAhmedOwais)
+- [**Mohammed Saad Uddin**](https://github.com/saad2134)
+- [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
+- [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
 
 ## 📄 License
 
