@@ -76,7 +76,7 @@ Contributions are welcome! If you find any bugs or have feature requests, please
  **Fareed Ahmed Owais**
  **Mohammed Saad Uddin**
  **Abdur Rahman Qasim**
- **Mohammed Abdul Rahman
+ **Mohammed Abdul Rahman**
 
 ## 📄 License
 
