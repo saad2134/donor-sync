@@ -18,12 +18,12 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 ## 📥 Installation
 
 1. Clone the repository:
-   bash
-   git clone https://github.com/yourusername/blood-bank-management.git
+   
+   ```git clone https://github.com/saad2134/donor-sync.git```
    
 2. Navigate to the project directory:
    bash
-   cd blood-bank-management
+   ```cd donor-sync```
    
 3. Open index.html in your preferred browser.
 
@@ -36,16 +36,16 @@ If you are using a local server (e.g., with Python):
    For Python 3:
 
    bash
-   `python -m http.server`
+   ```python -m http.server```
    
 
    For Python 2:
 
    bash
-   `python -m SimpleHTTPServer`
+   ```python -m SimpleHTTPServer```
    
 
-2. Open http://localhost:8000 in your browser.
+2. Open `http://localhost:8000` in your browser.
 
 ## 📊 Usage
 
