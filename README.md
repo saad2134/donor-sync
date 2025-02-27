@@ -78,15 +78,6 @@ Contributions are welcome! If you find any bugs or have feature requests, please
 - [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
 - [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
 
-## 📄 License
-
-This project is licensed under the [GNU License](LICENSE).
-
-
-## 🏷 Tags
-
-`#BloodBank` `#HealthcareTech` `#DatabaseManagement` `#WebApp` `#GBGChallenge` `#MedicalInnovation` `#BloodDonation` `#DonorManagement` `#HospitalManagement` `#FullStackDevelopment` `#HealthTech` `#EmergencyServices` `#DataManagement` `#CommunitySupport` `#HealthcareAccess` `#OpenSource` `#HealthcareInnovation`
-
 
 ## ✨ Icon
 
@@ -97,3 +88,11 @@ This project is licensed under the [GNU License](LICENSE).
 ![repository-open-graph](https://github.com/user-attachments/assets/13f5c0fd-96ff-4275-a634-4cd1efc79b52)
 
 
+## 📄 License
+
+This project is licensed under the [GNU License](LICENSE).
+
+
+## 🏷 Tags
+
+`#BloodBank` `#HealthcareTech` `#DatabaseManagement` `#WebApp` `#GBGChallenge` `#MedicalInnovation` `#BloodDonation` `#DonorManagement` `#HospitalManagement` `#FullStackDevelopment` `#HealthTech` `#EmergencyServices` `#DataManagement` `#CommunitySupport` `#HealthcareAccess` `#OpenSource` `#HealthcareInnovation`
