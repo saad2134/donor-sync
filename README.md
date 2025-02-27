@@ -91,3 +91,9 @@ This project is licensed under the [GNU License](LICENSE).
 ## ✨ Icon
 
 <img src="https://github.com/user-attachments/assets/01f9e3d6-85a7-4d97-9348-1fc046ea2ff2" alt="icon" width="250"/>
+
+## 🔰 Banner
+
+![repository-open-graph](https://github.com/user-attachments/assets/13f5c0fd-96ff-4275-a634-4cd1efc79b52)
+
+
