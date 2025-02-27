@@ -78,7 +78,7 @@ Contributions are welcome! If you find any bugs or have feature requests, please
 - [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
 - [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
 
-## 📄 License
+## 📄 License.
 
 This project is licensed under the [GNU License](LICENSE).
 
