@@ -88,6 +88,6 @@ This project is licensed under the [GNU License](LICENSE).
 `#BloodBank` `#HealthcareTech` `#DatabaseManagement` `#WebApp` `#GBGChallenge` `#MedicalInnovation` `#BloodDonation` `#DonorManagement` `#HospitalManagement` `#FullStackDevelopment` `#HealthTech` `#EmergencyServices` `#DataManagement` `#CommunitySupport` `#HealthcareAccess` `#OpenSource` `#HealthcareInnovation`
 
 
-## ✨ App Icon
+## ✨ Icon
 
 <img src="https://github.com/user-attachments/assets/01f9e3d6-85a7-4d97-9348-1fc046ea2ff2" alt="icon" width="250"/>
