@@ -90,6 +90,4 @@ This project is licensed under the [GNU License](LICENSE).
 
 ## ✨ App Icon
 
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/01f9e3d6-85a7-4d97-9348-1fc046ea2ff2" alt="icon" width="250" style="pointer-events: none;"/>
-</div>
+<img src="https://github.com/user-attachments/assets/01f9e3d6-85a7-4d97-9348-1fc046ea2ff2" alt="icon" width="250"/>
