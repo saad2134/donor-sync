@@ -1,4 +1,4 @@
-# 🩸 Donor Sync: Blood Bank Management System
+# 🩸 Donor Sync: Blood Bank Management System 
 
 A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility.
 
