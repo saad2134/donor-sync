@@ -5,7 +5,7 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 
 ## 🚀 Features
 
-- *🔗 Donor-Hospital Connection*: Directly links blood donors with hospitals for real-time donation requests. 
+- *🔗 Donor-Hospital Connection*: Directly links blood donors with hospitals for real-time donation requests.
 - *📊 Database Management*: Stores and manages detailed information on blood donors, hospitals, and active donor organizations.
 - *📈 Donation Tracking*: Tracks blood donation records and availability, ensuring transparency and faster access.
 - *🔒 User Access*: Secure access for hospitals, donors, and partner organizations.
