@@ -2,6 +2,9 @@
 
 A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility.
 
+## 💡 Google Developer Group (GDG) on Campus Solution Challenge India
+- Sustainable Development Goal (SDG): 3. Good health and well being.
+- Problem Statement: "Hospitals & Blood banks face challenges in maintaining accurate donor records, managing blood inventory, and ensuring timely availability for patients. Inefficiencies in tracking and matching blood types lead to delays, wastage, and increased risks during emergencies, requiring an automated system to streamline operations and improve accessibility".
 
 ## 🚀 Features
 
