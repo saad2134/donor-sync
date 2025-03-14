@@ -25,8 +25,9 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 
 - HTML, CSS, JavaScript
 - React + NextJS
-- shadcn/ui for UI components
-- Database Management System - PostgresQL
+- shadcn/ui & AceternityUI for UI components
+- [Phone Email](https://phone.email) for Email & Phone Verification.
+- Database Management System - Firestore NoSQL Database
 
 
 ## 📥 Installation *
