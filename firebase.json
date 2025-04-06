@@ -1,0 +1,57 @@
+{
+  "hosting": {
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "contact",
+        "destination": "/contact.html"
+      },
+      {
+        "source": "about",
+        "destination": "/about.html"
+      },
+      {
+        "source": "terms",
+        "destination": "/terms.html"
+      },
+      {
+        "source": "privacy",
+        "destination": "/privacy.html"
+      },
+      {
+        "source": "cookies",
+        "destination": "/cookies.html"
+      },
+      {
+        "source": "login",
+        "destination": "/login.html"
+      },
+      {
+        "source": "app",
+        "destination": "/app.html"
+      },
+      {
+        "source": "test",
+        "destination": "/test.html"
+      },
+      {
+        "source": "api/verify-phone",
+        "destination": "/api/verify-phone.html"
+      },
+      {
+        "source": "api/verify-email",
+        "destination": "/api/verify-email.html"
+      }
+    ],
+      "cleanUrls": true
+  }
+}
