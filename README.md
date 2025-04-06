@@ -23,47 +23,34 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 
 ## 🛠 Tech Stack *
 
-- HTML, CSS, JavaScript
-- React + NextJS
+- React + NextJS + TailwindCSS + TypeScript
 - shadcn/ui & AceternityUI for UI components
-- [Phone Email](https://phone.email) for Email & Phone Verification.
+- [Phone Email](https://phone.email) for Email & Phone Verification
+- [Uploadcare](https://uploadcare.com/) for File Storage
 - Database Management System - Firestore NoSQL Database
+- [Vercel](https://vercel.com/) for Hosting
+- [Project IDX](https://idx.google.com/) as a IDE
 
+##  📥 Install & ▶ Run the Project *
 
-## 📥 Installation *
+1. Clone & Download the Repo
 
-1. Clone the repository:
+2. Install NodeJS on your system.
 
+3. Open the project in your preferred IDE.
+
+4. Run in Terminal to Install all dependancies:
    ```bash
-   git clone https://github.com/saad2134/donor-sync.git
+   npm i
    ```
-   
-3. Navigate to the project directory:
 
+4. Get all api keys in env.template as set them in your env:
+
+
+5. Run in Terminal to Start Development Server:
    ```bash
-   cd donor-sync
+   npm run dev
    ```
-   
-4. Open index.html in your preferred browser.
-
-## ▶ Run the Project *
-
-If you are using a local server (e.g., with Python):
-
-1. Start a simple HTTP server:
-
-   For Python 3:
-   ```bash
-   python -m http.server
-   ```
-   
-   For Python 2:
-   ```bash
-   python -m SimpleHTTPServer
-   ```
-   
-
-3. Open `http://localhost:8000` in your browser.
 
 ## 🤝 Contributing
 
