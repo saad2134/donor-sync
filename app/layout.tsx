@@ -1,72 +1,52 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
+import { useEffect } from "react";
+import { UserProvider, useUser } from "@/context/UserContext";
+import { SettingsProvider } from "@/context/SettingsContext";
+import { Toaster } from "@/components/ui/toaster"
 
-
-// Button
-import { Button } from "@/components/ui/button"
-export function ButtonDemo() {
-  return <Button>Button</Button>
-}
-
-import { ThemeProvider } from "@/components/theme-provider"
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Donor Sync",
   description: "A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation.",
 };
 
+// Component to update device type
 
 
-
-
-// This layout applies a global header and footer to all pages.
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <UserProvider>
+      <SettingsProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head>
+            <link rel="icon" type="image/svg+xml" href="/donor-sync-icon-rounder-black-bg.svg" />
 
-      <head>
-        <link rel="icon" type="image/svg+xml" href="/donor-sync-icon-rounder.svg" />
-      </head>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
 
-      
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* <header className="p-4 bg-gray-200 text-white">
-          <h1>My Next.js App</h1>
-        </header> */}
+          </head>
 
+          <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
 
-
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-
-        {/* <footer className="p-4 bg-gray-200 text-center">
-          © 2024 My Next.js App
-        </footer> */}
-      </body>
-
-    </html>
+              {children}
+            </ThemeProvider>
+            <Toaster />
+          </body>
+        </html>
+      </SettingsProvider>
+    </UserProvider>
   );
 }

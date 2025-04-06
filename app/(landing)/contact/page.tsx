@@ -6,11 +6,6 @@ import { createPortal } from "react-dom";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
-import AceBrandIntroSparkles1 from '@/components/landing-page/AceBrandIntroSparkles1';
-import HardToResist from '@/components/landing-page/HardToResist';
-import AceBeamCollisonDemo from '@/components/landing-page/AceBeamCollisonDemo';
-import AceAuroraBackgroundDemo from '@/components/landing-page/AceAuroraBackgroundDemo';
-import Accordion from '@/components/landing-page/faq-accordion';
 import Footer from '@/components/landing-page/footer';
 
 export default function Home() {
@@ -25,12 +20,23 @@ export default function Home() {
   return createPortal(<div>
     <ScrollArea className="h-screen">
       <BusinessNavbar />
-
-      <AceBrandIntroSparkles1 />
-      <HardToResist />
-      <AceBeamCollisonDemo />
-      <AceAuroraBackgroundDemo />
-      <Accordion />
+      
+      {/* Terms and Conditions Section */}
+      <div className="pt-20 p-6 max-w-4xl mx-auto">
+        <br></br><br></br>
+        <h2 className="text-2xl font-bold mb-4">Contact</h2>
+        <p className="text-sm text-muted-foreground mb-2">
+          Simply send an email to one of us below:
+        </p>
+        <a 
+          href="mailto:csaad.3505@gmail.com" 
+          className="text-primary underline hover:text-primary/80"
+        >
+          csaad.3505@gmail.com
+        </a>
+        <br></br><br></br><br></br>
+      </div>
+      
       
       <Footer />
     </ScrollArea>

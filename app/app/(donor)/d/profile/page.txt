@@ -1,0 +1,99 @@
+
+//@ts-nocheck
+
+"use client";
+
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Upload, Pencil, Settings, LogOut } from "lucide-react";
+import { ContentLayout } from "@/components/admin-panel/content-layout";
+
+export default function ProfilePage() {
+  const [name, setName] = useState("John Doe");
+  const [bloodGroup, setBloodGroup] = useState("O+");
+  const [profilePic, setProfilePic] = useState("");
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setProfilePic(URL.createObjectURL(file));
+    }
+  };
+
+  return (
+    <ContentLayout>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-6">
+        {/* Profile Card */}
+        <Card className="w-full max-w-md bg-gray-900 border border-red-600 rounded-lg shadow-lg">
+          <CardHeader className="flex flex-col items-center">
+            <Avatar className="w-24 h-24 border-2 border-red-500">
+              <AvatarImage src={profilePic} alt="Profile Picture" />
+              <AvatarFallback className="bg-red-500 text-white text-xl">
+                {name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+              id="profile-upload"
+            />
+            <Label
+              htmlFor="profile-upload"
+              className="mt-2 flex items-center gap-2 text-red-500 cursor-pointer"
+            >
+              <Upload size={16} />
+              Upload Image
+            </Label>
+          </CardHeader>
+
+          <CardContent className="space-y-4 text-center">
+            {/* Name Edit */}
+            <div className="flex flex-col items-center">
+              <Label className="text-sm text-gray-400">Full Name</Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  className="text-center bg-gray-800 border-red-500 text-white"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <Pencil size={16} className="text-red-500" />
+              </div>
+            </div>
+
+            {/* Blood Group */}
+            <div className="flex flex-col items-center">
+              <Label className="text-sm text-gray-400">Blood Group</Label>
+              <Input
+                className="text-center bg-gray-800 border-red-500 text-white"
+                value={bloodGroup}
+                onChange={(e) => setBloodGroup(e.target.value)}
+              />
+            </div>
+
+            {/* Additional Info */}
+            <div className="text-gray-300 text-sm">
+              <p>📞 Contact: +123 456 7890</p>
+              <p>🩸 Last Donation: March 15, 2025</p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-between mt-4">
+              <Button variant="ghost" className="text-red-400">
+                <Settings size={18} className="mr-2" /> Settings
+              </Button>
+              <Button variant="destructive">
+                <LogOut size={18} className="mr-2" /> Logout
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </ContentLayout>
+  );
+}
