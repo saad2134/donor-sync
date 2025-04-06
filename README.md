@@ -4,7 +4,7 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 
 ## 💡 Google Developer Group (GDG) on Campus Solution Challenge India
 - Sustainable Development Goal (SDG): 3. Good health and well being.
-- Problem Statement: "Hospitals & Blood banks face challenges in maintaining accurate donor records, managing blood inventory, and ensuring timely availability for patients. Inefficiencies in tracking and matching blood types lead to delays, wastage, and increased risks during emergencies, requiring an automated system to streamline operations and improve accessibility".
+- Problem Statement: "Lack of Access to Healthcare in Underserved Communities".Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
 
 ## 🚀 Features
 
