@@ -29,7 +29,7 @@ A comprehensive web-based platform that connects blood donors directly with hosp
 - [Uploadcare](https://uploadcare.com/) for File Storage
 - Database Management System - Firestore NoSQL Database
 - [Vercel](https://vercel.com/) for Hosting
-- [Project IDX](https://idx.google.com/) as a IDE
+- [Firebase Studio](https://firebase.studio/) (formerly Project IDX) as a IDE
 
 ##  📥 Install & ▶ Run the Project *
 
