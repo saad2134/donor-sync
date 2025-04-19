@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+import Image from 'next/image'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -31,7 +33,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog"
-import { Upload, Pencil, Link, Globe, Lock, Loader2, Check, Car, Heart, CalendarDays, Star, Siren, HeartPulse, Cigarette, Pill, Wine, Calendar, Scale, Droplet } from "lucide-react";
+import { LockKeyhole, Lock, Pencil, Link, Globe, Loader2, Check, Car, Heart, CalendarDays, Star, Siren, HeartPulse, Cigarette, Pill, Wine, Calendar, Scale, Droplet } from "lucide-react";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 
 
@@ -212,6 +214,16 @@ export default function ProfilePage() {
 
   // # EDIT PROFILE MODAL FUNCTION
   const [openPE, setOpenPE] = useState(false)
+
+  const badgeList = [
+    'ReliableDonor',
+    'OnTimeDonor',
+    '20PlusDonations',
+    'LoyalDonor',
+    'TimelyDonor',
+    'ComittedDonor',
+    'FrequentDonor',
+  ]
 
   // # DELETE PROFILE MODAL FUNCTION
   const router = useRouter();
@@ -588,10 +600,47 @@ export default function ProfilePage() {
 
           <Card className="p-6 w-full max-w mx-auto flex flex-col gap-6">
             <h2 className="text-2xl font-bold text-center">Badges</h2>
-            <p className="text-lg text-center">Coming Soon</p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-center">
+              <TooltipProvider>
+                {badgeList.map((badge) => {
+                  const unlocked = profile?.[`${badge}Unlocked`] === 'yes'
+                  const imagePath = `/badges/donor/${badge}.svg`
+
+                  const badgeContent = (
+                    <div className="relative flex flex-col items-center">
+                      {/* Badge Container */}
+                      <div className="relative w-[100px] aspect-square rounded-lg overflow-hidden ">
+                        <Image
+                          src={imagePath}
+                          alt={badge}
+                          fill
+                          className={`object-contain transition-all ${unlocked ? '' : 'grayscale opacity-60'}`}
+                        />
+                        {!unlocked && (
+                          <div className="absolute top-1 left-1/2 -translate-x-1/2 bg-white/70 dark:bg-black/40 rounded-full p-1">
+                            <Lock className="w-4 h-4 text-foreground" />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+
+                  return unlocked ? (
+                    <div key={badge}>{badgeContent}</div>
+                  ) : (
+                    <Tooltip key={badge}>
+                      <TooltipTrigger asChild>{badgeContent}</TooltipTrigger>
+                      <TooltipContent>Unlock this badge by completing the criteria.</TooltipContent>
+                    </Tooltip>
+                  )
+                })}
+              </TooltipProvider>
+            </div>
           </Card>
 
-          <Card className="p-6 w-full max-w mx-auto flex flex-col gap-6 items-center text-center">
+          {/* Donation History Card */}
+          <Card className="p-6 w-full max-w mx-auto flex flex-col gap-4 items-center text-center">
             <h2 className="text-2xl font-bold">Donation History</h2>
             <Droplet className="w-8 h-8 text-red-400" />
             <p className="text-lg text-gray-600 dark:text-gray-400">
