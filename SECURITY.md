@@ -10,4 +10,4 @@ These versions of our project are currently being supported with security update
 
 ## Reporting a Vulnerability
 
-If you find any security flaw or vulnerability, kindly send an email at reach.saad@gmail.com or through the in-app feedback page.
+If you find any security flaw or vulnerability, kindly send an email at reach.saad@outlook.com or through the in-app feedback page.
