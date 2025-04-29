@@ -223,6 +223,7 @@ export default function ProfilePage() {
     'TimelyDonor',
     'ComittedDonor',
     'FrequentDonor',
+    'TopDonor',
   ]
 
   // # DELETE PROFILE MODAL FUNCTION
@@ -608,14 +609,18 @@ export default function ProfilePage() {
                   const imagePath = `/badges/donor/${badge}.svg`
 
                   const badgeContent = (
-                    <div className="relative flex flex-col items-center">
+                    <div className="flex flex-col items-center space-y-2">
+                      <Label className={`text-center text-sm font-medium text-gray-500 select-none`}>
+                        {unlocked ? '‎‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ' : 'Unlock by Completing!'}                  
+                      </Label>
+
                       {/* Badge Container */}
-                      <div className="relative w-[100px] aspect-square rounded-lg overflow-hidden ">
+                      <div className="relative w-[100px] aspect-square rounded-lg overflow-hidden">
                         <Image
                           src={imagePath}
                           alt={badge}
                           fill
-                          className={`object-contain transition-all ${unlocked ? '' : 'grayscale opacity-60'}`}
+                          className={`object-contain transition-all bg-foreground/10 ${unlocked ? '' : 'grayscale opacity-60'}`}
                         />
                         {!unlocked && (
                           <div className="absolute top-1 left-1/2 -translate-x-1/2 bg-white/70 dark:bg-black/40 rounded-full p-1">
@@ -623,11 +628,25 @@ export default function ProfilePage() {
                           </div>
                         )}
                       </div>
+
+                      {/* Label below the image */}
+                      <Label className={`text-center text-sm font-medium ${unlocked ? 'text-green-600' : ''}`}>
+                        {badge
+                          .replace(/([a-z])([A-Z0-9])/g, '$1 $2')  
+                          .replace(/([0-9])([A-Z])/g, '$1 $2')       
+                          .replace(/\bPlus\b/i, '+')                 
+                          .replace(/(\d)\s*\+\s*/g, '$1+')           
+                          .replace(/\+\s*/g, '+ ')}                  
+                      </Label>
                     </div>
-                  )
+                  );
+
 
                   return unlocked ? (
-                    <div key={badge}>{badgeContent}</div>
+                    <Tooltip key={badge}>
+                      <TooltipTrigger asChild>{badgeContent}</TooltipTrigger>
+                      <TooltipContent className="bg-green-500">Congratulations! You have successfully unlocked this badge.</TooltipContent>
+                    </Tooltip>
                   ) : (
                     <Tooltip key={badge}>
                       <TooltipTrigger asChild>{badgeContent}</TooltipTrigger>
