@@ -1,6 +1,6 @@
 # 🩸 Donor Sync: Blood Bank Management System 
 
-A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility.
+A comprehensive web-based and webapp platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility, with seamless connectivity between Donors,Patients,Hospitals and Organizations.
 
 ## 💡 Google Developer Group (GDG) on Campus Solution Challenge India
 - Sustainable Development Goal (SDG): 3. Good health and well being.
