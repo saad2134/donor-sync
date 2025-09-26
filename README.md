@@ -135,6 +135,16 @@ Contributions are welcome! If you find any bugs or have feature requests, please
 
 </div>
 
+## ⭐ Star History
+
+<a href="https://www.star-history.com/#saad2134/donor-sync&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=saad2134/donor-sync&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=saad2134/donor-sync&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=saad2134/donor-sync&type=Date" />
+ </picture>
+</a>
+
 ## ✨ Icon
 
 <img src="https://github.com/user-attachments/assets/01f9e3d6-85a7-4d97-9348-1fc046ea2ff2" alt="icon" width="250"/>
