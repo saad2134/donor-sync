@@ -4,7 +4,7 @@ A comprehensive web-based and webapp platform that connects blood donors directl
 
 ## 💡 Google Developer Group (GDG) on Campus Solution Challenge India 2025
 - Sustainable Development Goal (SDG): 3. Good health and well being.
-- Problem Statement: "Lack of Access to Healthcare in Underserved Communities".Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
+- Problem Statement: "Lack of Access to Healthcare in Underserved Communities". Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
 
 ## 🚀 Features
 
