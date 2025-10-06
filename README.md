@@ -56,10 +56,6 @@
       <td>[Android](native/) (non-natively through WebView)</td>
       <td>✅</td>
     </tr>
-    <tr>
-      <td>[iOS](native/) (non-natively through WebView)</td>
-      <td>✅</td>
-    </tr>
   </tbody>
 </table>
 
