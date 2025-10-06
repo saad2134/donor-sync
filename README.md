@@ -9,7 +9,7 @@
 - Problem Statement: "Lack of Access to Healthcare in Underserved Communities". Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
 
 <p align="center">
-  <a href="https://shiksha-disha.vercel.app/" target="_blank">
+  <a href="https://donorsync.vercel.app/" target="_blank">
     <img  style="width:350px;" src="https://img.shields.io/badge/🚀_Access_the_Prototype_Here-Live-brightgreen?style=for-the-badge&labelColor=ff3838" alt="Access the Prototype Here"  />
   </a>
 </p>
