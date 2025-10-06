@@ -77,6 +77,12 @@
    npm run dev
    ```
 
+### Try on Android (Using the app)
+1. Enable `Install from Unknown Sources` in your android device settings.
+2. Download the latest `.apk` file from the [`native`](native/) directory and install it on your device.
+
+
+
 ## 📁 Project Architecture
 ```
 donor-sync/
