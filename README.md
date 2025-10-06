@@ -1,10 +1,25 @@
 # 🩸 Donor Sync: Blood Bank Management System 
 
-A comprehensive web-based and webapp platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility, with seamless connectivity between Donors,Patients,Hospitals and Organizations.
+> <p align="center"><strong>A comprehensive web-based and webapp platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility, with seamless connectivity between Donors, Patients, Hospitals and Organizations. 🎯</strong></p>
 
-## 💡 Google Developer Group (GDG) on Campus Solution Challenge India 2025
+## ✨ Context
+
+### 💡 Google Developer Group (GDG) on Campus Solution Challenge India 2025
 - Sustainable Development Goal (SDG): 3. Good health and well being.
 - Problem Statement: "Lack of Access to Healthcare in Underserved Communities". Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
+
+<p align="center">
+  <a href="https://shiksha-disha.vercel.app/" target="_blank">
+    <img  style="width:350px;" src="https://img.shields.io/badge/🚀_Access_the_Prototype_Here-Live-brightgreen?style=for-the-badge&labelColor=ff3838" alt="Access the Prototype Here"  />
+  </a>
+</p>
+
+### 👥 Team Members
+
+1. [**Fareed Ahmed Owais**](https://github.com/FareedAhmedOwais)
+2. [**Mohammed Saad Uddin**](https://github.com/saad2134)
+3. [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
+4. [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
 
 ## 🚀 Features
 
@@ -21,14 +36,28 @@ A comprehensive web-based and webapp platform that connects blood donors directl
 3. *Hospitals*: Request blood directly from registered donors.
 4. *Organizations*: Manage donation drives and support patients.
 
-## 👥 Team Members
-
-1. [**Fareed Ahmed Owais**](https://github.com/FareedAhmedOwais)
-2. [**Mohammed Saad Uddin**](https://github.com/saad2134)
-3. [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
-4. [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
-
 ---
+
+## ⚙️ Platforms
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>Supported?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Web (any browser with JS functionality) + Fully Responsive</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Android (non-natively through WebView)</td>
+      <td>✅</td>
+    </tr>
+  </tbody>
+</table>
 
 ## 🛠 Tech Stack *
 
@@ -40,7 +69,9 @@ A comprehensive web-based and webapp platform that connects blood donors directl
 - [Vercel](https://vercel.com/) for Hosting
 - [Firebase Studio](https://firebase.studio/) (formerly Project IDX) as a IDE
 
-##  📥 Install & ▶ Run the Project *
+## 🚀 Getting Started *
+
+### 📥 Install & ▶ Run the Project 
 
 1. Clone & Download the Repo
 
@@ -100,22 +131,6 @@ donor-sync/
 ## 📱 Screenshots
 
 <table> <tr> <td><strong>Landing Page</strong><br><br> <img src="https://github.com/user-attachments/assets/4c4d534c-c6f3-4049-a0bb-ace850f0d1ba" width="100%" alt="Landing Page" /> </td> </tr> <tr> <td><strong>Authentication</strong><br><br> <img src="https://github.com/user-attachments/assets/cc9c6a2b-1e15-4fdc-8ade-813c71853d50" width="300px" alt="Authentication" /> </td> </tr> <tr> <td><strong>Donor Blood Donation Search</strong><br><br> <img src="https://github.com/user-attachments/assets/5ba4b049-67a1-483a-b219-d11e7b037d8f" width="100%" alt="Donor Blood Donation Search" /> </td> </tr> <tr> <td><strong>Donor Profile</strong><br><br> <img src="https://github.com/user-attachments/assets/1f09e451-d409-4ba5-aaf0-d6d7291f365f" width="100%" alt="Donor Profile" /> </td> </tr> <tr> <td><strong>Settings</strong><br><br> <img src="https://github.com/user-attachments/assets/777be84e-23ff-4d86-a4f0-18f5cbae6978" width="100%" alt="Settings" /> </td> </tr> <tr> <td><strong>Community</strong><br><br> <img src="https://github.com/user-attachments/assets/99f36774-a22a-4f5b-b573-a582f020e1e8" width="100%" alt="Community" /> </td> </tr> <tr> <td><strong>Syncbot AI Chatbot</strong><br><br> <img src="https://github.com/user-attachments/assets/a83f5337-f572-4ce8-a987-8847f2ed7d4a" width="100%" alt="Syncbot AI Chatbot" /> </td> </tr> </table>
-
-
-
-## 🤝 Contributing
-
-Contributions are welcome! If you find any bugs or have feature requests, please open an issue or submit a pull request.
-
-1. Fork the repository.
-2. Create a new branch (feature/your-feature).
-3. Commit your changes.
-4. Push to your branch.
-5. Open a pull request.
-
-
-
-
 
 ## 📊 **Project Stats**
 
