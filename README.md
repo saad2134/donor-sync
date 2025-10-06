@@ -57,7 +57,7 @@
 
 ## 🚀 Getting Started *
 
-### 📥 Install & ▶ Run the Project 
+### Install & Run the Project 
 
 1. Clone & Download the Repo
 
