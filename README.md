@@ -40,24 +40,10 @@
 
 ## ⚙️ Platforms
 
-<table border="1" cellpadding="10" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Platform</th>
-      <th>Supported?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Web (any browser with JS functionality) + Fully Responsive</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>[Android](native/) (non-natively through WebView)</td>
-      <td>✅</td>
-    </tr>
-  </tbody>
-</table>
+| Platform                                                       | Supported? |
+| --------------------------------------------------------------- | ----------- |
+| Web (any browser with JS functionality) + Fully Responsive       | ✅          |
+| [Android](native/) (non-natively through WebView)                | ✅          |
 
 ## 🛠 Tech Stack *
 
