@@ -14,7 +14,7 @@
   </a>
 </p>
 
-### 👥 Team Members
+### 👥 Original Hack2innovate Team Members
 
 1. [**Fareed Ahmed Owais**](https://github.com/FareedAhmedOwais)
 2. [**Mohammed Saad Uddin**](https://github.com/saad2134)
