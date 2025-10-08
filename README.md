@@ -43,7 +43,7 @@
 | Platform                                                       | Supported? |
 | --------------------------------------------------------------- | ----------- |
 | Web (any browser with JS functionality) + Fully Responsive       | ✅          |
-| [Android](native/) (non-natively through WebView)                | ✅          |
+| [Android](frontend-android/) (non-natively through WebView)                | ✅          |
 
 ## 🛠 Tech Stack *
 
@@ -57,7 +57,7 @@
 
 ## 🚀 Getting Started *
 
-### Install & Run the Project 
+### Web Frontend: Install & Run the Project 
 
 1. Clone & Download the Repo
 
@@ -77,7 +77,10 @@
    npm run dev
    ```
 
-### Try on Android (Using the app)
+### Web Frontend: 
+1. Simply go to https://donorsync.vercel.app/
+
+### Android Frontend: Using the app
 1. Enable `Install from Unknown Sources` in your android device settings.
 2. Download the latest `.apk` file from the [`native`](native/) directory and install it on your device.
 
@@ -86,38 +89,34 @@
 ## 📁 Project Architecture
 ```
 donor-sync/
-├── app/
-│   └── …            # Top‑level Next.js app directory (routes, layouts, pages etc.)
-├── components/
-│   └── …            # Reusable UI components (buttons, forms, cards, etc.)
-├── context/
-│   └── …            # React Contexts for state management across components
-├── data/
-│   └── …            # Static data, seed data, or JSON fixtures used in the app
-├── hooks/
-│   └── …            # Custom React hooks (e.g. for fetching, authentication, etc.)
-├── lib/
-│   └── …            # Library code: utilities, helper functions, wrappers over APIs
-├── public/
-│   └── …            # Static assets (images, icons, fonts etc.)
-├── types/
-│   └── …            # TypeScript type definitions and interfaces
-├── firebaseConfig.ts
-│   └── …            # Firebase setup / initialization logic
-├── firebaseFunctions.ts
-│   └── …            # Cloud Functions or server‑side Firebase logic
-├── next.config.ts
-│   └── …            # Next.js configuration
-├── tailwind.config.ts
-│   └── …            # Tailwind CSS configuration
-├── tsconfig.json
-│   └── …            # TypeScript configuration
-├── env.template       # Template for environment variables (API keys, etc.)
-├── firebase.json      # Firebase project settings, rules, etc.
-├── database.rules.json# Firestore database rules
-├── package.json       # Project dependencies & scripts
-├── eslint.config.mjs  # Linting rules
 └── README.md & LICENSE etc.
+└── frontend-web/
+    ├── app/
+    │   └── …                     # Top-level Next.js app directory (routes, layouts, pages, etc.)
+    ├── components/
+    │   └── …                     # Reusable UI components (buttons, forms, cards, etc.)
+    ├── context/
+    │   └── …                     # React Contexts for state management across components
+    ├── data/
+    │   └── …                     # Static data, seed data, or JSON fixtures used in the app
+    ├── hooks/
+    │   └── …                     # Custom React hooks (e.g. for fetching, authentication, etc.)
+    ├── lib/
+    │   └── …                     # Library code: utilities, helper functions, wrappers over APIs
+    ├── public/
+    │   └── …                     # Static assets (images, icons, fonts, etc.)
+    ├── types/
+    │   └── …                     # TypeScript type definitions and interfaces
+    ├── firebaseConfig.ts          # Firebase setup / initialization logic
+    ├── firebaseFunctions.ts       # Cloud Functions or server-side Firebase logic
+    ├── next.config.ts             # Next.js configuration
+    ├── tailwind.config.ts         # Tailwind CSS configuration
+    ├── tsconfig.json              # TypeScript configuration
+    ├── env.template               # Template for environment variables (API keys, etc.)
+    ├── firebase.json              # Firebase project settings, rules, etc.
+    ├── database.rules.json        # Firestore database rules
+    ├── package.json               # Project dependencies & scripts
+    ├── eslint.config.mjs          # Linting rules
 ```
 
 ## 📱 Screenshots
