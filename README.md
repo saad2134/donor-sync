@@ -77,7 +77,7 @@
    npm run dev
    ```
 
-### Web Frontend: 
+### Web Frontend: Using the app
 1. Simply go to https://donorsync.vercel.app/
 
 ### Android Frontend: Using the app
