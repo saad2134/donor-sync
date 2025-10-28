@@ -1,18 +1,24 @@
-<h1 align="center"> 🩸 Donor Sync (Blood Bank Management System) </h1>
+<h1 align="center"> 🩸 Donor Sync – Blood Bank Management System </h1>
 
 > <p align="center"><strong>A comprehensive web-based and webapp platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility, with seamless connectivity between Donors, Patients, Hospitals and Organizations. 🎯</strong></p>
 
+
+<div align="center">
+
+<a href="https://donorsync.vercel.app/" target="_blank">
+  <img  style="width:350px;" src="https://img.shields.io/badge/🚀_Access_the_Prototype_Here-Live-brightgreen?style=for-the-badge&labelColor=ff3838" alt="Access the Prototype Here"  />
+</a>
+
+![Phase](https://img.shields.io/badge/🛠️%20Phase-In%20Development-blue?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/🌐%20Platforms-Web%20%7C%20Android*-28a745?style=for-the-badge)
+
+</div>
+
 ## ✨ Context 
 
-### 💡 Google Developer Group (GDG) on Campus Solution Challenge India 2025
+### 🏆 Prototype for Google Developer Group (GDG) on Campus Solution Challenge India 2025
 - Sustainable Development Goal (SDG): 3. Good health and well being.
 - Problem Statement: "Lack of Access to Healthcare in Underserved Communities". Many communities, especially in rural and remote areas, lack access to basic healthcare services. This results in poor health outcomes, preventable diseases, and reduced quality of life. Barriers include inadequate healthcare infrastructure, a shortage of medical professionals, and limited awareness of preventive care.
-
-<p align="center">
-  <a href="https://donorsync.vercel.app/" target="_blank">
-    <img  style="width:350px;" src="https://img.shields.io/badge/🚀_Access_the_Prototype_Here-Live-brightgreen?style=for-the-badge&labelColor=ff3838" alt="Access the Prototype Here"  />
-  </a>
-</p>
 
 ### 👥 Original Hack2innovate Team Members
 
