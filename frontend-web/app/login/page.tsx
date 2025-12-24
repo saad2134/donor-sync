@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import RoleCard from "@/components/ui/rolecard"
 import { motion, AnimatePresence } from "framer-motion"
+import { Variants } from "framer-motion";
 
 import HeartLoading from "@/components/custom/HeartLoading"; // <HeartLoading />
 
@@ -397,7 +398,7 @@ export default function LoginPage() {
   }, [userId, router]);
 
   // Define variants with explicit transitions.
-  const roleSelectionVariants = {
+  const roleSelectionVariants: Variants = {
     initial: (dir: number) => (dir === -1 ? { x: "-100%" } : { x: 0 }),
     animate: {
       x: 0,
@@ -409,7 +410,7 @@ export default function LoginPage() {
     },
   }
 
-  const newScreenVariants = {
+  const newScreenVariants: Variants = {
     initial: { x: "100%" },
     animate: {
       x: 0,
