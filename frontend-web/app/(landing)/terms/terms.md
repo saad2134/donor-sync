@@ -1,10 +1,10 @@
 # <b>Terms & Conditions</b>
 
-_Last updated: [Insert Date]_
+_Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ## Introduction
 
-Welcome to **Blood Bank Donor Sync**. By using our platform, you agree to the following terms and conditions. Please read them carefully.
+Welcome to **Donor Sync**. By using our platform, you agree to the following terms and conditions. Please read them carefully.
 
 ## User Responsibilities
 
@@ -44,6 +44,4 @@ We reserve the right to update these terms. Continued use of the platform after 
 
 For any questions, contact us at:
 
-**Email:** www.donorsync.com 
-
-**Website:** <i> insert here after deploying</i> 
+**Email:** reach.saad@outlook.com 

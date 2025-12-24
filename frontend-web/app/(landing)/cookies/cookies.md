@@ -1,10 +1,10 @@
 # Cookie Policy
 
-_Last updated: [Insert Date]_
+_Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ## Introduction
 
-Welcome to **Blood Bank Donor Sync**. This Cookie Policy outlines how we use cookies and similar tracking technologies to enhance user experience, ensure security, and improve our services.
+Welcome to **Donor Sync**. This Cookie Policy outlines how we use cookies and similar tracking technologies to enhance user experience, ensure security, and improve our services.
 
 ## What Are Cookies?
 
@@ -33,5 +33,4 @@ We may update this policy periodically to reflect changes in regulations or our 
 
 For inquiries regarding this Cookie Policy, please reach out to us:
 
-**Email:** [Insert Email]  
-**Website:** [Insert Website]  
+**Email:** reach.saad@outlook.com

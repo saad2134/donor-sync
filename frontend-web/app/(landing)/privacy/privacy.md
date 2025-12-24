@@ -1,6 +1,6 @@
 # Privacy, Security, and Data Retention Policies
 
-_Last updated: [Insert Date]_
+_Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ---
 
@@ -8,7 +8,7 @@ _Last updated: [Insert Date]_
 
 ### Introduction
 
-Welcome to **Blood Bank Donor Sync**. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information.
+Welcome to **Donor Sync**. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information.
 
 ### Information We Collect
 
@@ -50,7 +50,7 @@ We may update this policy periodically. Any changes will be communicated on our 
 
 ### Introduction
 
-At **Blood Bank Donor Sync**, we are committed to protecting user data. This policy explains how long we retain user information and when it is deleted.
+At **Donor Sync**, we are committed to protecting user data. This policy explains how long we retain user information and when it is deleted.
 
 ### Data We Retain
 
@@ -83,7 +83,7 @@ We may update this policy periodically. Changes will be reflected with an update
 
 ### General Information
 
-**Blood Bank Donor Sync** is a platform that facilitates connections between blood donors, hospitals, and recipients. We do not directly collect, test, or distribute blood.
+**Donor Sync** is a platform that facilitates connections between blood donors, hospitals, and recipients. We do not directly collect, test, or distribute blood.
 
 ### Medical Disclaimer
 
@@ -117,5 +117,4 @@ This disclaimer may be updated periodically. Users will be notified of major cha
 
 For inquiries regarding this disclaimer, contact us:
 
-**Email:** [Insert Email]  
-**Website:** [Insert Website]  
+**Email:** reach.saad@outlook.com  

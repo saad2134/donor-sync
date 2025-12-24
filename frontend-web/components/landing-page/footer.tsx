@@ -20,6 +20,21 @@ export default function Footer() {
                   Our Team
                 </a>
               </li>
+              <li>
+                <a href="pricing" className="text-muted-foreground hover:text-foreground">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="partner" className="text-muted-foreground hover:text-foreground">
+                  Partner with Us
+                </a>
+              </li>
+              <li>
+                <a href="sponsor-n-donate" className="text-muted-foreground hover:text-foreground">
+                  Sponsor Us & Donate
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -43,7 +58,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/refund-policy" className="text-muted-foreground hover:text-foreground">
+                <a href="/refunds" className="text-muted-foreground hover:text-foreground">
                   Refund Policy
                 </a>
               </li>
@@ -84,19 +99,24 @@ export default function Footer() {
 
           {/* copyright section footer*/}
         </div>
-        <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground pl-10 pr-10">
-          <p>
-            © 2025 Donor Sync. All rights reserved. Built with ❤️ for the{" "}
+        <div className="mt-12 pt-8 border-t border-border text-center pl-10 pr-10">
+          <p className="text-muted-foreground">
+            © 2025 Donor Sync. All rights reserved.
+          </p>
+
+          <p className="mt-1 text-muted-foreground/70">
+            Originally built with ❤️ as a prototype for the{" "}
             <a
               href="https://vision.hack2skill.com/event/solutionschallenge2025"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
+              className="hover:underline text-muted-foreground"
             >
               GDG on Campus Solution Challenge 2025
             </a>.
           </p>
         </div>
+
       </div>
     </footer>
   );

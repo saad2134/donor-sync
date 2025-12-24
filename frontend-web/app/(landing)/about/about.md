@@ -39,5 +39,4 @@ We are committed to ensuring that **no life is lost due to a delay in blood avai
 
 For any inquiries or support, reach out to us:
 
-**Email:** [Insert Email]  
-**Website:** [Insert Website]  
+**Email:** reach.saad@outlook.com

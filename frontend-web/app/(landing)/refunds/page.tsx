@@ -13,7 +13,7 @@ import html from "remark-html";
 
 
 export default async function RefundPolicyPage() {
-  const filePath = path.join(process.cwd(), "app", "(landing)", "refund-policy", "refund-policy.md");
+  const filePath = path.join(process.cwd(), "app", "(landing)", "refunds", "refund-policy.md");
   const fileContents = await fs.readFile(filePath, "utf8");
 
   const processedContent = await remark().use(html).process(fileContents);

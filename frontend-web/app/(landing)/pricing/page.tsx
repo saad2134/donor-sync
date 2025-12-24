@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
 import Footer from '@/components/landing-page/footer';
 
-export default function Home() {
+export default function PricingPage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -23,16 +23,10 @@ export default function Home() {
       
       <div className="pt-20 p-6 max-w-4xl mx-auto">
         <br></br><br></br>
-        <h2 className="text-2xl font-bold mb-4">Contact</h2>
+        <h2 className="text-2xl font-bold mb-4">Pricing</h2>
         <p className="text-sm text-muted-foreground mb-2">
-          Simply send an email to the email(s) below:
+          Comming soon. Don't worry, our core features will always be free for everyone.
         </p>
-        <a 
-          href="mailto:reach.saad@outlook.com" 
-          className="text-primary underline hover:text-primary/80"
-        >
-          reach.saad@outlook.com
-        </a>
         <br></br><br></br><br></br>
       </div>
       
