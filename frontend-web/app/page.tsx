@@ -12,6 +12,7 @@ import AceBeamCollisonDemo from '@/components/landing-page/AceBeamCollisonDemo';
 import AceAuroraBackgroundDemo from '@/components/landing-page/AceAuroraBackgroundDemo';
 import Accordion from '@/components/landing-page/faq-accordion';
 import Footer from '@/components/landing-page/footer';
+import PatientProcess from "@/components/landing-page/PatientProcess";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -28,6 +29,7 @@ export default function Home() {
 
       <AceBrandIntroSparkles1 />
       <HardToResist />
+      {/* <PatientProcess /> */}
       <AceBeamCollisonDemo />
       <AceAuroraBackgroundDemo />
       <Accordion />

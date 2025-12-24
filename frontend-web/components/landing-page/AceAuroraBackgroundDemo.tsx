@@ -30,10 +30,10 @@ export default function AuroraBackgroundDemo() {
         ease: "easeInOut"
       }} className="relative flex flex-col gap-4 items-center justify-center px-4">
           <div className="text-2xl md:text-4xl font-bold text-foreground text-center ">
-          🩸 Are you willing to contribute for the betterment?
+          🩸 Are you willing to contribute for a better world?
           </div>
           <div className="font-extralight text-base md:text-2xl text-muted-foreground py-4 pl-20 pr-20 text-center">
-          Finding the right blood match shouldn’t be stressful. Donor Sync connects you with hospitals and donors quickly, so you get the blood you need when you need it.
+          Finding the right blood match shouldn’t be stressful. DonorSync connects you with hospitals and donors quickly, so you get the blood you need when you need it.
           </div>
           
           

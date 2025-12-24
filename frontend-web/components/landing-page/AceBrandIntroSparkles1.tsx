@@ -4,7 +4,7 @@ export default function AceBrandIntroSparkles1() {
       <div className="w-full absolute inset-0 h-screen">
         <AceSparkles id="tsparticlesfullpage" background="transparent" minSize={0.6} maxSize={1.4} particleDensity={100} className="w-full h-full" speed={1} />
       </div>
-      <h1 className="md:text-7xl text-4xl lg:text-9xl font-bold text-center text-foreground relative z-20 ">
+      <h1 className="md:text-5xl text-4xl lg:text-6xl font-bold text-center text-foreground relative z-20 ">
         Unified platform connecting{" "}
         <div className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
         <span className="inline-block pb-2">blood donors, hospitals, and patients</span>

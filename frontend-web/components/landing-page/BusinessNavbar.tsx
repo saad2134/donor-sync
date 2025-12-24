@@ -39,7 +39,7 @@ export default function BusinessNavbar() {
             alt="Icon"
             className="w-8 h-8 rounded-md"
           />
-          <span className="text-xl font-semibold hide-text">Donor Sync</span>
+          <span className="text-xl font-semibold hide-text">DonorSync</span>
         </Link>
       </div>
 

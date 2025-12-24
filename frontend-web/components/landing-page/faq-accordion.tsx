@@ -6,7 +6,7 @@ export default function FAQAccordion() {
 
   const faqs = [
     {
-      question: "What is Donor Sync?",
+      question: "What is DonorSync?",
       answer:
         "It is a platform that connects blood donors with hospitals, allowing efficient blood donation and management.",
     },
@@ -19,7 +19,7 @@ export default function FAQAccordion() {
     {
       question: "Is it free to use?",
       answer:
-        "Yes, our platform is completely free.",
+        "Yes, all of our patient and donor features will always to be completely free to use. Majority of our features for hospitals and organisations will also continue to be free to use.",
 
     },
     {
@@ -31,7 +31,7 @@ export default function FAQAccordion() {
     {
       question: "How do I register for an account?",
       answer:
-        "To register, click on the <a href='/login'><b>Sign Up</b></a> button on the homepage, fill in the required information, and verify your email address.",
+        "To register, click on the <a href='/login'><b>Login</b></a> button on the homepage, fill in the required information and verify your phone/email.",
     },
     {
       question: "Is my data secure?",
@@ -42,7 +42,7 @@ export default function FAQAccordion() {
     {
       question: "How do I contact support?",
       answer:
-        "You can contact support through our <a href='/contact'><b>Contact Us</b></a> page or by emailing <i>csaad.3505@gmail.com</i>",
+        "You can contact support through our <a href='/contact'><b>Contact Us</b></a> page or by emailing <i>reach.saad@outlook.com</i>",
     },
   ]; 
  

@@ -1,8 +1,8 @@
-# <b>About Blood Bank Donor Sync</b>
+# <b>About Donor Sync</b>
 
 ## Introduction
 
-**Blood Bank Donor Sync** is a digital platform designed to **eliminate delays in emergency blood requirements** by seamlessly connecting donors, hospitals, and blood banks. Our system ensures **quick, reliable, and efficient** access to life-saving blood donations, reducing the risks associated with blood shortages.
+**Donor Sync** is a digital platform designed to **eliminate delays in emergency blood requirements** by seamlessly connecting donors, hospitals, and blood banks. Our system ensures **quick, reliable, and efficient** access to life-saving blood donations, reducing the risks associated with blood shortages.
 
 ## Our Mission
 
@@ -25,7 +25,7 @@ Our **intuitive and simple UI** ensures that:
 - **Minimal input fields** are required to **quickly process urgent blood requests**.
 - Hospitals can **update blood stock availability seamlessly**, ensuring that patients and donors receive real-time information.
 
-## Who Can Use Blood Bank Donor Sync?
+## Who Can Use Donor Sync?
 
 - **Blood Donors**: Individuals who wish to save lives by donating blood efficiently.
 - **Hospitals & Blood Banks**: Medical institutions managing blood inventory and patient transfusions can update and request blood stocks in real time.
