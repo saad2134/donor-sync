@@ -8,12 +8,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
 import Footer from '@/components/landing-page/footer';
 
-export const metadata = {
-  title: "Sponsor Us & Donate | DonorSync",
-  description: "Donate or Sponsor the DonorSync platform to aid us in making the world a better place.",
-};
-
-
 
 export default function SponsorDonatePage() {
   const [mounted, setMounted] = useState(false);
