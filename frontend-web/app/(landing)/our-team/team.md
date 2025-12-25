@@ -1,4 +1,4 @@
-# <b>Team Behind DonorSync</b>
+# <b>The Team Behind DonorSync</b>
 
 ## 👥 Initial Development 
 

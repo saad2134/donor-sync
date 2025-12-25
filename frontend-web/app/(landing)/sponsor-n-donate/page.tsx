@@ -18,22 +18,27 @@ export default function SponsorDonatePage() {
   if (!mounted) return null;
 
   return createPortal(<div>
-    <ScrollArea className="h-screen">
+    <ScrollArea className="h-screen absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
       <BusinessNavbar />
-      
+
       <div className="pt-20 p-6 max-w-4xl mx-auto">
         <br></br><br></br>
-        <h2 className="text-2xl font-bold mb-4">Sponsor Us / Donate</h2>
+        <h2 className="text-2xl font-bold mb-4">Sponsor Us</h2>
+        <p className="text-sm text-muted-foreground mb-2">
+          Coming Soon.
+        </p>
+        <br></br>
+        <h2 className="text-2xl font-bold mb-4">Donate</h2>
         <p className="text-sm text-muted-foreground mb-2">
           Coming Soon.
         </p>
         <br></br><br></br><br></br>
       </div>
-      
-      
+
+
       <Footer />
     </ScrollArea>
-    </div>,
+  </div>,
     document.body
   );
 }

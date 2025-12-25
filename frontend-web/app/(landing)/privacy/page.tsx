@@ -22,7 +22,7 @@ export default async function PrivacyPage() {
   return (
     <ClientPortal>
 
-      <ScrollArea className="h-screen">
+      <ScrollArea className="h-screen absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
         <BusinessNavbar />
 
         {/* Privacy content */}

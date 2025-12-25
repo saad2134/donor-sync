@@ -21,8 +21,8 @@ export default async function TermsPage() {
 
   return (
     <ClientPortal>
-
-      <ScrollArea className="h-screen">
+ 
+      <ScrollArea className="h-screen absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
         <BusinessNavbar />
 
         {/* Terms and Conditions content */}

@@ -18,7 +18,7 @@ export default function PricingPage() {
   if (!mounted) return null;
 
   return createPortal(<div>
-    <ScrollArea className="h-screen">
+    <ScrollArea className="h-screen absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
       <BusinessNavbar />
       
       <div className="pt-20 p-6 max-w-4xl mx-auto">

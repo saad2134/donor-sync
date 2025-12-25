@@ -22,11 +22,11 @@ export default async function AboutPage() {
   return (
     <ClientPortal>
 
-      <ScrollArea className="h-screen">
+      <ScrollArea className="h-screen absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
         <BusinessNavbar />
 
         {/* About content */}
-        <div className="max-w-2xl mx-auto p-10 pt-20 pb-20 text-foreground scrollbar-hide">
+        <div className="max-w-2xl mx-auto p-10 pt-20 pb-20 text-foreground scrollbar-hide ">
           <br></br><br></br>
           <article className="prose 
     prose-headings:text-foreground 
