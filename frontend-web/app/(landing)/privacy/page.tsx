@@ -9,6 +9,10 @@ import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
+export const metadata = {
+  title: "Privacy Policy | DonorSync",
+  description: "Read this to understand about how the DonorSync platform handles your data and privacy.",
+};
 
 
 

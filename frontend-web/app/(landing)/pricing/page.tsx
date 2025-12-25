@@ -8,6 +8,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
 import Footer from '@/components/landing-page/footer';
 
+export const metadata = {
+  title: "Pricing | DonorSync",
+  description: "Understand the pricing structure for services on the DonorSync platform.",
+};
+
+
 export default function PricingPage() {
   const [mounted, setMounted] = useState(false);
 

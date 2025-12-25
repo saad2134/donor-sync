@@ -9,7 +9,10 @@ import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
-
+export const metadata = {
+  title: "About | DonorSync",
+  description: "Understand more about the DonorSync platform.",
+};
 
 
 export default async function AboutPage() {

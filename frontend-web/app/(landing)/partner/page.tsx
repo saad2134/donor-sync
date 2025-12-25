@@ -8,6 +8,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
 import Footer from '@/components/landing-page/footer';
 
+export const metadata = {
+  title: "Partner With Us | DonorSync",
+  description: "Partner with the DonorSync team to make the world a better place.",
+};
+
+
 export default function PartnerPage() {
   const [mounted, setMounted] = useState(false);
 

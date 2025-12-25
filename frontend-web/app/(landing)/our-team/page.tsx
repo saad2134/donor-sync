@@ -10,6 +10,10 @@ import { remark } from "remark";
 import html from "remark-html";
 
 
+export const metadata = {
+  title: "Our Team | DonorSync",
+  description: "Meet the team behind the DonorSync platform.",
+};
 
 
 export default async function TeamPage() {

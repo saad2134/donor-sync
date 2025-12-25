@@ -9,6 +9,10 @@ import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
+export const metadata = {
+  title: "Refunds Policy | DonorSync",
+  description: "Read this to understand about how the DonorSync platform handles refunds.",
+};
 
 
 

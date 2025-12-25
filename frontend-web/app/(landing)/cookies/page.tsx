@@ -9,7 +9,10 @@ import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
-
+export const metadata = {
+  title: "Cookie Policy | DonorSync",
+  description: "Read this to understand about how the DonorSync platform uses cookies.",
+};
 
 
 export default async function CookiesPage() {
