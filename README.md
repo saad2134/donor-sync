@@ -181,7 +181,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ---
 
 ## ✍️ Endnote
-<p align="center">Developed with 💖 for the GDG on Campus Solution Challenge India 2025, with heartfelt thanks to Google & Hack2skill for the opportunity to build and innovate.</p>
+<p align="center">Initially developed with 💖 as a Prototype for Google Developer Group (GDG) on Campus Solution Challenge India 2025</p>
+<p align="center">⭐ Star this repo if you found it helpful! Thanks for reading.</p>
 
 ---
 

@@ -12,7 +12,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   experimental: {
-    serverActions: true, // Ensure APIs work properly in App Router
+    // serverActions is enabled by default // Ensure APIs work properly in App Router
   },
 };
 

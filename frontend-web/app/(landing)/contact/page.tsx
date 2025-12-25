@@ -51,7 +51,7 @@ export default async function Contact() {
                     <div className="space-y-6">
                       <h3 className="font-semibold mb-4">Email Us</h3>
                       <div>
-                        <p className="text-muted-foreground">For all inquiries</p>
+                        <p className="text-muted-foreground">For all inquiries:</p>
                         <a
                           href="mailto:contact@DonorSync.com"
                           className="text-primary hover:underline font-medium"

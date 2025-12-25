@@ -113,8 +113,8 @@ export default function FooterSection({
       links: [
         { text: "Home", href: "/" },
         { text: "About", href: "/about" },
-        { text: "Contact", href: "/contact" },
         { text: "Our Team", href: "/our-team" },
+        { text: "Contact", href: "/contact" },
         // { text: "Careers", href: "/careers" },
       ],
     },
@@ -246,23 +246,23 @@ export default function FooterSection({
           {/* Footer Bottom Section */}
           <FooterBottom className="flex flex-row justify-center items-center mt-10 gap-4">
             <div className="flex items-center justify-center w-full text-sm text-muted-foreground/75 pt-4">
-              <p className="text-muted-foreground/75 text-center">
+              <div className="text-muted-foreground/75 text-center">
+                {copyright}
                 <p className="text-muted-foreground/25 text-center select-none">
-                Originally built with ❤️ as a prototype for the{" "}
+                <br />
+                Originally built with 💖 as a prototype for the{" "}
                 <a
                   href="https://vision.hack2skill.com/event/solutionschallenge2025"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline"
                 >
-                  GDG on Campus Solution Challenge 2025
+                  Google Developer Group (GDG) on Campus Solution Challenge India 2025 Hackathon
                 </a>.
                 <br />
                 Disclaimers: We are not responsible for the content of any external sites we may link to. All 3rd party IP such as logos, icons, etc. shown are the property of their respective owners.
                 </p>
-                <br />
-                {copyright}
-              </p>
+              </div>
               
             </div>
           </FooterBottom>
