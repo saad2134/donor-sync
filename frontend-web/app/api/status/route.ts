@@ -63,6 +63,17 @@ const services: Service[] = [
       }
     },
   },
+  {
+    name: 'Feedback Collection (Apps Script)',
+    check: async () => {
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzxm5TmObKpnsht5_AtI4D-9gBbLUahnbiFGHxXjTM-xIRlNeKihnwbFoCHxyiz9rPI/exec', { method: 'HEAD', signal: AbortSignal.timeout(8000) });
+        return res.status < 500;
+      } catch {
+        return false;
+      }
+    },
+  },
 ];
 
 export async function GET() {

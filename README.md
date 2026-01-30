@@ -60,6 +60,8 @@
 - [Uploadcare](https://uploadcare.com/) for File Storage
 - Database Management System - Firestore NoSQL Database
 - [Vercel](https://vercel.com/) for Hosting
+- [Apps Script](https://script.google.com/) for Feedback Collection 
+- Gemeni API for Syncbot Chatbot
 - [Firebase Studio](https://firebase.studio/) (formerly Project IDX) as a IDE
 
 ## 🚀 Getting Started *
