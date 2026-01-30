@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from 'next/link'
 
@@ -16,10 +16,38 @@ import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 
 
 export const FooterLogo = () => {
+  const [status, setStatus] = useState<'operational' | 'issues' | 'degraded' | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch('/api/status');
+        const json = await res.json();
+        setStatus(json.status);
+      } catch (error) {
+        console.error('Failed to fetch status:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const getDotColor = () => {
+    if (loading) return 'bg-muted-foreground';
+    if (status === 'operational') return 'bg-green-500';
+    if (status === 'issues') return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
+
   return (
     <Link
-      href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2  py-1 text-sm font-normal text-black">
+      href="/status"
+      className="relative z-20 mr-4 flex flex-wrap items-center gap-3 py-1 text-sm font-normal text-black ">
 
       <img
         src="/donor-sync-icon-rounder.svg"
@@ -27,7 +55,12 @@ export const FooterLogo = () => {
         width={30}
         height={30}
       />
-      <h1 className="font-medium text-xl text-black dark:text-white">DonorSync</h1>
+      <h1 className="font-medium text-xl text-black dark:text-white pr-2">DonorSync</h1>
+
+      <div className="inline-flex items-center rounded-md border border-foreground/30 px-2.5 py-0.5 text-xs font-semibold gap-2 bg-background text-foreground">
+        <div className={`w-2 h-2 rounded-full ${loading ? 'bg-muted-foreground' : ''} ${status === 'operational' ? 'bg-green-500' : ''} ${status === 'issues' ? 'bg-yellow-500' : ''} ${status === 'degraded' ? 'bg-red-500' : ''}`} />
+        {loading ? 'Checking...' : status ? status.charAt(0).toUpperCase() + status.slice(1) : ''}
+      </div>
 
     </Link>
   );
@@ -263,7 +296,7 @@ export default function FooterSection({
                 Disclaimers: We are not responsible for the content of any external sites we may link to. All 3rd party IP such as logos, icons, etc. shown are the property of their respective owners.
                 </p>
               </div>
-              
+
             </div>
           </FooterBottom>
         </Footer>
