@@ -23,29 +23,9 @@ export async function POST(req: Request) {
         ];
 
         if (validatedUrl.protocol !== "https:" || !allowedHosts.includes(validatedUrl.hostname)) {
-            console.error("Blocked request to disallowed URL (host/protocol):", validatedUrl.toString());
+            console.error("Blocked request to disallowed URL:", validatedUrl.toString());
             return NextResponse.json({ error: "user_json_url is not allowed." }, { status: 400 });
         }
-
-        // Further restrict the path to reduce SSRF risk (no traversal, only known prefixes)
-        const disallowedPathPatterns = ["..", "%2e%2e", "%2E%2E"];
-        const pathname = validatedUrl.pathname || "/";
-        const lowerPathname = pathname.toLowerCase();
-
-        if (disallowedPathPatterns.some((pattern) => lowerPathname.includes(pattern))) {
-            console.error("Blocked request due to disallowed path traversal sequence:", pathname);
-            return NextResponse.json({ error: "user_json_url path is not allowed." }, { status: 400 });
-        }
-
-        // Optionally, limit requests to specific path prefixes on the allowed host
-        const allowedPathPrefixes = ["/", "/verify", "/api"];
-        if (!allowedPathPrefixes.some((prefix) => pathname.startsWith(prefix))) {
-            console.error("Blocked request to disallowed path:", pathname);
-            return NextResponse.json({ error: "user_json_url path is not allowed." }, { status: 400 });
-        }
-
-        // Rebuild a safe URL using the validated origin and sanitized path/search
-        const safeUrl = new URL(pathname + validatedUrl.search, validatedUrl.origin);
 
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
         const API_KEY = process.env.PHONE_EMAIL_API_KEY;
@@ -57,7 +37,7 @@ export async function POST(req: Request) {
         }
 
         // Fetch user details from the verification API
-        const response = await fetch(safeUrl.toString(), {
+        const response = await fetch(validatedUrl.toString(), {
             headers: {
                 "Authorization": `Bearer ${API_KEY}`,
                 "Content-Type": "application/json",
