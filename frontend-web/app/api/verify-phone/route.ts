@@ -18,12 +18,24 @@ export async function POST(req: Request) {
 
         // Allow-list of trusted verification API hosts
         const ALLOWED_HOSTS = ["trusted-verification.example.com"];
+        // Allow-list of trusted path prefixes on the verification API
+        const ALLOWED_PATH_PREFIXES = ["/api/verify-phone", "/v1/verify-phone"];
 
         if (
             (verifiedUrl.protocol !== "https:" && verifiedUrl.protocol !== "http:") ||
             !ALLOWED_HOSTS.includes(verifiedUrl.hostname)
         ) {
             return NextResponse.json({ error: "user_json_url is not allowed." }, { status: 400 });
+        }
+
+        // Further restrict the path to known safe endpoints to prevent SSRF to unintended resources
+        const pathIsAllowed = ALLOWED_PATH_PREFIXES.some(prefix =>
+            verifiedUrl.pathname === prefix || verifiedUrl.pathname.startsWith(prefix + "/")
+        );
+
+        // Disallow path traversal segments even within allowed prefixes
+        if (!pathIsAllowed || verifiedUrl.pathname.includes("..")) {
+            return NextResponse.json({ error: "user_json_url path is not allowed." }, { status: 400 });
         }
 
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
