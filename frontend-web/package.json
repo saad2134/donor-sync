@@ -31,7 +31,7 @@
     "@uploadcare/react-uploader": "^1.6.0",
     "@uploadthing/react": "^7.3.0",
     "ai": "^4.2.6",
-    "axios": "^1.8.4",
+    "axios": "^1.12.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
