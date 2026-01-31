@@ -3,8 +3,8 @@
 # temp foler
 /temp
 
-# TEMP FILE FOR STORING MULTI LINE ERROR LOGS
-ERROR_LOG.md 
+# TEMP DIR FOR STORING MULTI LINE .md PLAN FILES 
+/planning
 
 # dependencies
 /node_modules

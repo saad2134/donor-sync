@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function HardToResist() {
   const benefits = [{
     title: "Patients",
-    description: "Sign up and request the blood you need—we’ll help you find it quickly.",
+    description: "Sign up and request the blood you need, we’ll help you find it quickly.",
     icon: "🩸"
   }, {
     title: "Donors",
