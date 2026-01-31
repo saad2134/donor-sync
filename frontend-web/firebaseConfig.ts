@@ -15,13 +15,12 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-// Initialize Firebase only if API key is present
-const app = getApps().length === 0 && firebaseConfig.apiKey ? initializeApp(firebaseConfig) : getApp();
-
+let app: any = null;
 let auth: ReturnType<typeof getAuth> | null = null;
 let db: ReturnType<typeof getFirestore> | null = null;
 
 if (firebaseConfig.apiKey) {
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
   auth = getAuth(app);
   auth.useDeviceLanguage();
   db = getFirestore(app);
