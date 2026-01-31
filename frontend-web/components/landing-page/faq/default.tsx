@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import React from "react";
 import { motion } from "framer-motion";
-import { APP_CONFIG, FAQ_CONFIG } from "@/config/config";
+import { APP_CONFIG, FAQ_CONFIG } from "@/config/CORE_CONFIG";
 
 
 
@@ -104,7 +104,7 @@ export function FAQ() {
                                 <AccordionItem
                                     key={index}
                                     value={`item-${index}`}
-                                    className="border border-border rounded-lg px-6 bg-gradient-to-br from-card via-background to-card/50 relative w-full shrink-0 hover:shadow-lg transition-all duration-300 hover:from-accent/10 hover:via-background hover:to-accent/10 backdrop-blur-sm"
+                                    className="border border-border rounded-lg px-6 bg-gradient-to-br from-card via-background to-card/50 relative w-full shrink-0 hover:shadow-lg transition-all duration-300 from-accent/10 via-background to-accent/10  hover:from-accent/25 hover:via-background hover:to-accent/25 backdrop-blur-sm"
                                 >
                                     <AccordionTrigger className="text-left font-medium hover:no-underline py-4 text-foreground">
                                         {question}

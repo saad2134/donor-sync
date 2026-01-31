@@ -126,7 +126,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-20 px-4">
               {tiers.map((tier) => {
                 const Icon = tier.icon;
                 return (

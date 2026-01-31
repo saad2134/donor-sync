@@ -1,11 +1,12 @@
 // --@ts-nocheck
 import { ContentLayout } from "@/components/admin-panel/content-layout";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export default function UrgentDonationsPage() {
   return (
     <ContentLayout title="Community">
       <div className="min-h-screen p-8 bg-gray-200 text-black dark:bg-black dark:text-white rounded-2xl">
-        <h1 className="text-4xl sm:text-3xl font-bold text-red-600 mb-8">DonorSync Community</h1>
+        <h1 className="text-4xl sm:text-3xl font-bold text-red-600 mb-8">{APP_CONFIG.appName} Community</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[

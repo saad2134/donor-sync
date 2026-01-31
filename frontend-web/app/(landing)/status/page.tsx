@@ -8,6 +8,7 @@ import Footer from "@/components/landing-page/footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 interface ServiceStatus {
   name: string;
@@ -78,7 +79,7 @@ export default function StatusPage() {
         <div className="max-w-4xl mx-auto p-8 pt-32 pb-20">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-foreground mb-2">System Status</h1>
-            <p className="text-muted-foreground">Real-time status of all DonorSync services and dependencies.</p>
+            <p className="text-muted-foreground">Real-time status of all {APP_CONFIG.appName} services and dependencies.</p>
           </div>
 
           <Card className="p-6 mb-6 border-2">
@@ -142,7 +143,7 @@ export default function StatusPage() {
           <Card className="p-4 mt-6 bg-muted/50">
             <h3 className="font-semibold text-foreground mb-2">About This Status Page</h3>
             <p className="text-sm text-muted-foreground">
-              This page monitors the status of core services and dependencies used by DonorSync.
+              This page monitors the status of core services and dependencies used by {APP_CONFIG.appName}.
               Checks are performed every 60 seconds automatically. Services are checked via HTTP HEAD requests
               with a 5-second timeout. If you notice any persistent issues, please contact our support team.
             </p>

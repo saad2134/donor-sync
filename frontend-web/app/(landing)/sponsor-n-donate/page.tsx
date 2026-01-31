@@ -43,7 +43,7 @@ export default function SponsorDonatePage() {
         "Champion tier benefits",
         "Personalized thank you email",
         "Quarterly impact report",
-        "DonorSync badge for social media"
+        "Social media shoutout"
       ],
       icon: HandHeart,
       popular: true
@@ -212,7 +212,7 @@ export default function SponsorDonatePage() {
               })}
             </div>
 
-            <div className="mb-20">
+            <div className="mb-20 px-4">
               <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Make a One-Time Donation</h2>
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 Choose your impact level. Every donation supports emergency blood access.
@@ -266,7 +266,7 @@ export default function SponsorDonatePage() {
               </div>
             </div>
 
-            <div className="mb-20">
+            <div className="mb-20  px-4">
               <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Recurring Support</h2>
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 Make a bigger impact with monthly or annual contributions.
@@ -310,7 +310,7 @@ export default function SponsorDonatePage() {
               </div>
             </div>
 
-            <div className="mb-20">
+            <div className="mb-20  px-4">
               <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Sponsorship Opportunities</h2>
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 Organizations can sponsor specific initiatives and see measurable impact.

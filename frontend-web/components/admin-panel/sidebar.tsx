@@ -2,6 +2,7 @@
 import { Menu } from "@/components/admin-panel/menu";
 import { SidebarToggle } from "@/components/admin-panel/sidebar-toggle";
 import { Button } from "@/components/ui/button";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@/lib/utils";
@@ -38,7 +39,7 @@ export function Sidebar() {
               <img
                 src="/donor-sync-icon-rounder.svg"
                 className="h-11 w-11 min-w-[44px] min-h-[44px] flex-shrink-0"
-                alt="Donor Sync Icon"
+                alt="DonorSync Icon"
               />
               <h1
                 className={cn(
@@ -48,7 +49,7 @@ export function Sidebar() {
                     : "translate-x-0 opacity-100"
                 )}
               >
-                Donor Sync
+                {APP_CONFIG.appName}
               </h1>
             </div>
           </Link>

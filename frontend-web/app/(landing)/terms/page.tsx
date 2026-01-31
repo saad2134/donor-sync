@@ -8,10 +8,11 @@ import { promises as fs } from "fs";
 import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export const metadata = {
-  title: "Terms of Service | DonorSync",
-  description: "Read this to understand about the DonorSync platform terms of service.",
+  title: `Terms of Service | ${APP_CONFIG.appName}`,
+  description: `Read this to understand about the ${APP_CONFIG.appName} platform terms of service.`,
 };
 
 

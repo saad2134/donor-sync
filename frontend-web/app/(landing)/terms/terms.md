@@ -4,7 +4,7 @@ _Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ## Introduction
 
-Welcome to **Donor Sync**. By using our platform, you agree to the following terms and conditions. Please read them carefully.
+Welcome to **DonorSync**. By using our platform, you agree to the following terms and conditions. Please read them carefully.
 
 ## User Responsibilities
 

@@ -155,7 +155,7 @@
   /* Firefox */
 }
 
-/* For Nav Bar Donor Sync Title Text, Hide text below 550px*/
+/* For Nav Bar DonorSync Title Text, Hide text below 550px*/
 @media (max-width: 475px) {
   .hide-text {
     display: none;

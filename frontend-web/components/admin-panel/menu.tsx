@@ -22,6 +22,7 @@ interface MenuProps {
 
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export function Menu({ isOpen }: MenuProps) {
   const { userId, role, onboarded, device, setUser } = useUser(); // Get user data from context
@@ -158,7 +159,7 @@ export function Menu({ isOpen }: MenuProps) {
             </TooltipProvider>
 
           </li>
-          <p className="w-full text-center text-xs text-muted-foreground pt-2">v1.0.0</p>
+          <p className="w-full text-center text-xs text-muted-foreground pt-2">{APP_CONFIG.version}</p>
         </ul>
       </nav>
     </ScrollArea>

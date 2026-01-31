@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/footer";
 
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 
 
@@ -55,7 +56,7 @@ export const FooterLogo = () => {
         width={30}
         height={30}
       />
-      <h1 className="font-medium text-xl text-black dark:text-white pr-2">DonorSync</h1>
+      <h1 className="font-medium text-xl text-black dark:text-white pr-2">{APP_CONFIG.appName}</h1>
 
       <div className="inline-flex items-center rounded-md border border-foreground/30 px-2.5 py-0.5 text-xs font-semibold gap-2 bg-background text-foreground">
         <div className={`w-2 h-2 rounded-full ${loading ? 'bg-muted-foreground' : ''} ${status === 'operational' ? 'bg-green-500' : ''} ${status === 'issues' ? 'bg-yellow-500' : ''} ${status === 'degraded' ? 'bg-red-500' : ''}`} />
@@ -139,7 +140,7 @@ const SocialIcons = {
 
 export default function FooterSection({
   logo = <FooterLogo />,
-  name = "DonorSync",
+  name = `${APP_CONFIG.appName}`,
   columns = [
     {
       title: "Explore",
@@ -169,7 +170,7 @@ export default function FooterSection({
       ],
     },
   ],
-  copyright = `© ${Number.isFinite(new Date().getFullYear()) ? new Date().getFullYear() : 2025} DonorSync. All rights reserved.`,
+  copyright = `© ${Number.isFinite(new Date().getFullYear()) ? new Date().getFullYear() : 2025} ${APP_CONFIG.appName} ${APP_CONFIG.version}. All rights reserved.`,
   policies = [
     { text: "Privacy Policy", href: '/privacy' },
     { text: "Terms of Service", href: '/terms' },
@@ -223,7 +224,7 @@ export default function FooterSection({
 
                 </div>
                 <p className="text-muted-foreground text-sm max-w-md">
-                  A comprehensive open-source web-based platform that connects blood donors directly with hospitals, and hospitals with patients, and even NGOs ensuring quick and efficient blood donation.
+                  {APP_CONFIG.appDescription}
                 </p>
 
                 {/* Social Media Icons */}

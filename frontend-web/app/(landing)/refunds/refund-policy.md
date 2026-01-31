@@ -4,7 +4,7 @@ _Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ## Introduction
 
-At **Donor Sync**, we strive to provide a seamless experience and keep things as accessible to the people in need as possible. This Refund Policy outlines the conditions for refunds (if applicable).
+At **DonorSync**, we strive to provide a seamless experience and keep things as accessible to the people in need as possible. This Refund Policy outlines the conditions for refunds (if applicable).
 
 ## Refund Eligibility
 

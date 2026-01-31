@@ -8,10 +8,11 @@ import { promises as fs } from "fs";
 import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export const metadata = {
-  title: "About | DonorSync",
-  description: "Understand more about the DonorSync platform.",
+  title: `About | ${APP_CONFIG.appName}`,
+  description: `Understand more about the ${APP_CONFIG.appName} platform.`,
 };
 
 

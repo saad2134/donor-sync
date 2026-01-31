@@ -19,6 +19,7 @@ import { useUser } from "@/context/UserContext";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 export default function BusinessNavbar() {
   const { setTheme } = useTheme()
   const router = useRouter()
@@ -39,7 +40,7 @@ export default function BusinessNavbar() {
             alt="Icon"
             className="w-8 h-8 rounded-md"
           />
-          <span className="text-xl font-semibold hide-text">DonorSync</span>
+          <span className="text-xl font-semibold hide-text">{APP_CONFIG.appName}</span>
         </Link>
       </div>
 

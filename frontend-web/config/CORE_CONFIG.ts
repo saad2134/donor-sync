@@ -1,6 +1,8 @@
 // src/app/config.ts
 export const APP_CONFIG = {
-  version: "v1.1.0",
+  appName: "DonorSync",
+  appDescription: "A comprehensive open-source web-based platform that connects blood donors directly with hospitals, and hospitals with patients, and even NGOs ensuring quick and efficient blood donation.",
+  version: "v1.1.0 alpha",
   last_updated_legal: "19th December 2025",
   getStartedUrl: "/login",
   contacts: {
@@ -13,7 +15,7 @@ export const FAQ_CONFIG = {
   description: "Get answers to common questions about blood donation, donor registration, hospital services, and platform features. Can't find what you're looking for?",
   items: [
     {
-      question: "What is DonorSync?",
+      question: `What is ${APP_CONFIG.appName}?`,
       answer:
         "It is a platform that connects blood donors with hospitals, allowing efficient blood donation and management.",
     },

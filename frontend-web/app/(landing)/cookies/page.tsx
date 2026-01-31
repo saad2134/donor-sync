@@ -8,10 +8,11 @@ import { promises as fs } from "fs";
 import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export const metadata = {
-  title: "Cookie Policy | DonorSync",
-  description: "Read this to understand about how the DonorSync platform uses cookies.",
+  title: `Cookie Policy | ${APP_CONFIG.appName}`,
+  description: `Read this to understand about how the ${APP_CONFIG.appName} platform uses cookies.`,
 };
 
 

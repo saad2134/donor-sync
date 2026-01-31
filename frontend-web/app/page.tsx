@@ -28,18 +28,13 @@ export default function Home() {
       <BusinessNavbar />
 
 
-
       <HeroSparkles />
-      <PlatformBenefits />
-      {/* <PlatformProcess /> */}
-
+        <PlatformBenefits />
+        {/* <PlatformProcess /> */}
       <MobilePhoneView />
       <Quote />
-
       <FAQ />
-
-      <FinalCTA /> 
-
+        <FinalCTA /> 
 
 
       <Footer />

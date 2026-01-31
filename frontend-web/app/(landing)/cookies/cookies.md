@@ -4,7 +4,7 @@ _Last updated: 24-12-2025 (DD-MM-YYYY)_
 
 ## Introduction
 
-Welcome to **Donor Sync**. This Cookie Policy outlines how we use cookies and similar tracking technologies to enhance user experience, ensure security, and improve our services.
+Welcome to **DonorSync**. This Cookie Policy outlines how we use cookies and similar tracking technologies to enhance user experience, ensure security, and improve our services.
 
 ## What Are Cookies?
 

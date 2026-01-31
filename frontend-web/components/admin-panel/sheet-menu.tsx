@@ -10,6 +10,7 @@ import {
   SheetTrigger,
   SheetTitle
 } from "@/components/ui/sheet";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export function SheetMenu() {
   return (
@@ -30,10 +31,10 @@ export function SheetMenu() {
               <img
                 src="/donor-sync-icon-rounder.svg"
                 className="h-11 w-11 min-w-[44px] min-h-[44px] flex-shrink-0"
-                alt="Donor Sync Icon"
+                alt="DonorSync Icon"
               />
 
-              <SheetTitle className="font-bold text-lg pr-4">Donor Sync</SheetTitle>
+              <SheetTitle className="font-bold text-lg pr-4">{APP_CONFIG.appName}</SheetTitle>
             </Link>
           </Button>
         </SheetHeader>

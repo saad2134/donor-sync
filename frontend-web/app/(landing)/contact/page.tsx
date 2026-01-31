@@ -1,10 +1,11 @@
 import Footer from "@/components/landing-page/footer";
 import Navbar from "@/components/landing-page/BusinessNavbar";
 import { ContactForm } from "@/components/landing-page/contact-form";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 export const metadata = {
-  title: "Contact Us | DonorSync",
-  description: "Get in touch with the DonorSync team for support, inquiries, or collaboration opportunities.",
+  title: `Contact Us | ${APP_CONFIG.appName}`,
+  description: `Get in touch with the ${APP_CONFIG.appName} team for support, inquiries, or collaboration opportunities.`,
 };
 
 export default async function Contact() {
@@ -53,7 +54,7 @@ export default async function Contact() {
                       <div>
                         <p className="text-muted-foreground">For all inquiries:</p>
                         <a
-                          href="mailto:contact@DonorSync.com"
+                          href="mailto:reach.saad@outlook.com"
                           className="text-primary hover:underline font-medium"
                         >
                           reach.saad@outlook.com

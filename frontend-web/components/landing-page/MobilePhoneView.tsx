@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
 interface MobilePhoneViewProps {
@@ -41,8 +42,59 @@ const MobilePhoneView = ({
   className,
 }: MobilePhoneViewProps) => {
   const { resolvedTheme } = useTheme();
-  return ( 
+  return (
     <section className={cn("bg-gradient-to-b from-transparent to-primary/5 py-40 lg:py-40 px-8 relative overflow-hidden", className)}>
+      {/* Animated background layers */}
+      <div className="absolute inset-0">
+        {/* Gradient mesh background */}
+        <div className="absolute inset-0 " />
+        <div className="absolute inset-0 " />
+
+        {/* Floating orbs */}
+        <motion.div
+          className="absolute top-[15%] left-[5%] h-28 w-28 rounded-full bg-primary/20 blur-2xl"
+          animate={{
+            x: [0, -40, 20, 0],
+            y: [0, 20, -10, 0],
+            scale: [1.2, 1.8, 1.4, 1.2],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[15%] left-[10%] h-40 w-40 rounded-full bg-secondary/20 blur-2xl"
+          animate={{
+            x: [0, 35, -15, 0],
+            y: [-20, 10, 25, -20],
+            scale: [1, 1.5, 1.2, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <motion.div
+          className="absolute top-[45%] right-[15%] h-24 w-24 rounded-full bg-accent/15 blur-xl"
+          animate={{
+            x: [0, -25, 30, 0],
+            y: [0, -20, 15, 0],
+            scale: [1.3, 0.9, 1.6, 1.3],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 3,
+          }}
+        />
+      </div>
+
+
       {/* <Shader3 /> */}
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center gap-8 lg:my-0 lg:flex-row lg:gap-12">
         <div className="flex flex-col gap-5 lg:w-1/2 ">
@@ -77,13 +129,14 @@ const MobilePhoneView = ({
               <img
                 src={resolvedTheme === "dark" ? image.darkSrc : image.lightSrc}
                 alt={image.alt}
-                className="size-full object-cover object-[50%]"
+                className="size-full object-cover object-[50%] select-none"
               />
             </div>
             <img
-              className="relative z-10 w-full h-auto max-w-[350px] md:max-w-[400px] select-none"
+              className="relative z-10 w-full h-auto max-w-[350px] md:max-w-[400px] user-select-none"
               src="samsung-galaxy-s24-ultra-2024-medium.png"
               alt="phone"
+              draggable={false}
             />
           </div>
         </div>

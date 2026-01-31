@@ -6,12 +6,13 @@ import { useEffect } from "react";
 import { UserProvider, useUser } from "@/context/UserContext";
 import { SettingsProvider } from "@/context/SettingsContext";
 import { Toaster } from "@/components/ui/toaster"
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DonorSync ✦ Blood Donation Platform",
-  description: "A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation.",
+  title: `${APP_CONFIG.appName} ✦ Blood Donation Platform`,
+  description: `${APP_CONFIG.appDescription}`,
 };
 
 // Component to update device type
