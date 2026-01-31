@@ -60,7 +60,7 @@ export default function PartnerPage() {
   const csrOpportunities = [
     {
       title: "District-Level Sponsorship",
-      price: "₹50,000 - ₹2,00,000",
+      price: "₹50,000 - 2,00,000",
       period: "annually",
       description: "Sponsor an entire district's blood network and be recognized as a champion of public health.",
       features: [
@@ -72,8 +72,8 @@ export default function PartnerPage() {
       badge: "High Impact"
     },
     {
-      title: "Hospital Network Partnership",
-      price: "₹5,00,000 - ₹15,00,000",
+      title: "Network Partnership",
+      price: "₹5,00,000 - 15,00,000",
       period: "annually",
       description: "Partner with a network of hospitals to sponsor life-saving blood services for underserved communities.",
       features: [
@@ -88,7 +88,7 @@ export default function PartnerPage() {
       title: "National Health Champion",
       price: "Custom",
       period: "negotiable",
-      description: "Become a founding partner in revolutionizing India's public health infrastructure.",
+      description: "Become a founding partner in revolutionizing India's public health infrastructure. Get in touch today!",
       features: [
         "National brand recognition",
         "Speaking opportunities at events",
@@ -162,7 +162,7 @@ export default function PartnerPage() {
             </div>
 
             <Tabs defaultValue="government" className="w-full mb-20">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 p-1 bg-muted">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 p-1 bg-foreground/10">
                 <TabsTrigger value="government" className="data-[state=active]:bg-background data-[state=active]:shadow-md">
                   <Globe className="w-4 h-4 mr-2" />
                   Government

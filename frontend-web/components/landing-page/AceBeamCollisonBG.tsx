@@ -81,10 +81,9 @@ export default function AceBeamCollisonBG({
       {children}
       <div
         ref={containerRef}
-        className="absolute bottom-0 bg-muted w-full inset-x-0 pointer-events-none"
+        className="absolute bottom-0 bg-muted/30 w-full inset-x-0 pointer-events-none"
         style={{
-          boxShadow:
-            "0 0 24px hsl(var(--muted)/0.06), 0 1px 1px hsl(var(--muted)/0.05), 0 0 0 1px hsl(var(--muted)/0.04), 0 0 4px hsl(var(--muted)/0.08), 0 16px 68px hsl(var(--muted)/0.05), 0 1px 0 hsl(var(--background)/0.1) inset",
+          backgroundImage: "linear-gradient(180deg, transparent 0%, transparent 100%)",
         }}
       ></div>
     </div>
@@ -194,7 +193,7 @@ const CollisionMechanism = React.forwardRef<
           repeatDelay: beamOptions.repeatDelay || 0,
         }}
         className={cn(
-          "absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-primary via-secondary to-transparent",
+          "absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-primary/80 via-primary/40 to-transparent",
           beamOptions.className
         )}
       />
@@ -218,36 +217,44 @@ const CollisionMechanism = React.forwardRef<
 CollisionMechanism.displayName = "CollisionMechanism";
 
 const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
-  const spans = Array.from({ length: 20 }, (_, index) => ({
+  const particles = Array.from({ length: 16 }, (_, index) => ({
     id: index,
     initialX: 0,
     initialY: 0,
-    directionX: Math.floor(Math.random() * 80 - 40),
-    directionY: Math.floor(Math.random() * -50 - 10),
+    directionX: Math.floor(Math.random() * 120 - 60),
+    directionY: Math.floor(Math.random() * -80 - 20),
   }));
 
   return (
-    <div {...props} className={cn("absolute z-50 h-2 w-2", props.className)}>
+    <div {...props} className={cn("absolute z-50 h-16 w-16", props.className)}>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute -inset-x-10 top-0 m-auto h-2 w-10 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent blur-sm"
-      ></motion.div>
-      {spans.map((span) => (
-        <motion.span
-          key={span.id}
-          initial={{ x: span.initialX, y: span.initialY, opacity: 1 }}
-          animate={{
-            x: span.directionX,
-            y: span.directionY,
-            opacity: 0,
-          }}
-          transition={{ duration: Math.random() * 1.5 + 0.5, ease: "easeOut" }}
-          className="absolute h-1 w-1 rounded-full bg-gradient-to-b from-primary to-secondary"
-        />
-      ))}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="absolute inset-4 rounded-full bg-primary/20 blur-xl"
+        ></motion.div>
+        {particles.map((particle) => (
+          <motion.span
+            key={particle.id}
+            initial={{ x: particle.initialX, y: particle.initialY, opacity: 1 }}
+            animate={{
+              x: particle.directionX,
+              y: particle.directionY,
+              opacity: 0,
+            }}
+            transition={{ duration: Math.random() * 0.6 + 0.3, ease: "easeOut" }}
+            className="absolute h-3 w-3 rounded-full bg-gradient-to-br from-primary to-secondary"
+          />
+        ))}
+      </motion.div>
     </div>
   );
 };
