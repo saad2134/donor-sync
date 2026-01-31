@@ -8,25 +8,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Missing user_json_url." }, { status: 400 });
         }
 
-        // Validate the user_json_url to prevent SSRF
-        let validatedUrl: URL;
-        try {
-            validatedUrl = new URL(user_json_url);
-        } catch {
-            return NextResponse.json({ error: "Invalid user_json_url format." }, { status: 400 });
-        }
-
-        // Enforce HTTPS and restrict to known verification host(s)
-        const allowedHosts = [
-            "api.phone-email-verification.com",
-            // Add additional allowed hosts here if needed
-        ];
-
-        if (validatedUrl.protocol !== "https:" || !allowedHosts.includes(validatedUrl.hostname)) {
-            console.error("Blocked request to disallowed URL:", validatedUrl.toString());
-            return NextResponse.json({ error: "user_json_url is not allowed." }, { status: 400 });
-        }
-
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
         const API_KEY = process.env.PHONE_EMAIL_API_KEY;
         const CLIENT_ID = process.env.PHONE_EMAIL_CLIENT_ID;
@@ -37,7 +18,7 @@ export async function POST(req: Request) {
         }
 
         // Fetch user details from the verification API
-        const response = await fetch(validatedUrl.toString(), {
+        const response = await fetch(user_json_url, {
             headers: {
                 "Authorization": `Bearer ${API_KEY}`,
                 "Content-Type": "application/json",
