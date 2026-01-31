@@ -4,30 +4,48 @@ export async function POST(req: Request) {
     try {
         const { user_json_url } = await req.json();
 
-        if (!user_json_url || typeof user_json_url !== "string") {
-            return NextResponse.json({ error: "Missing or invalid user_json_url." }, { status: 400 });
+        if (!user_json_url) {
+            return NextResponse.json({ error: "Missing user_json_url." }, { status: 400 });
         }
 
-        // Interpret user_json_url as a constrained key, not a full URL, to prevent SSRF
-        const BASE_VERIFICATION_URL = "https://api.phone-email-verification.com";
+        // Validate the user_json_url to prevent SSRF
+        let validatedUrl: URL;
+        try {
+            validatedUrl = new URL(user_json_url);
+        } catch {
+            return NextResponse.json({ error: "Invalid user_json_url format." }, { status: 400 });
+        }
 
-        // Map of allowed keys to concrete paths on the verification API
-        const allowedEndpointMap: Record<string, string> = {
-            // Example mappings; adjust keys/paths as needed:
-            "verify": "/verify",
-            "verify-email": "/verify/email",
-        };
+        // Enforce HTTPS and restrict to known verification host(s)
+        const allowedHosts = [
+            "api.phone-email-verification.com",
+            // Add additional allowed hosts here if needed
+        ];
 
-        const trimmedKey = user_json_url.trim();
-        const endpointPath = allowedEndpointMap[trimmedKey];
-
-        if (!endpointPath) {
-            console.error("Blocked request to disallowed verification endpoint key:", trimmedKey);
+        if (validatedUrl.protocol !== "https:" || !allowedHosts.includes(validatedUrl.hostname)) {
+            console.error("Blocked request to disallowed URL (host/protocol):", validatedUrl.toString());
             return NextResponse.json({ error: "user_json_url is not allowed." }, { status: 400 });
         }
 
-        // Rebuild a safe URL using a fixed origin and a server-controlled path
-        const safeUrl = new URL(endpointPath, BASE_VERIFICATION_URL);
+        // Further restrict the path to reduce SSRF risk (no traversal, only known prefixes)
+        const disallowedPathPatterns = ["..", "%2e%2e", "%2E%2E"];
+        const pathname = validatedUrl.pathname || "/";
+        const lowerPathname = pathname.toLowerCase();
+
+        if (disallowedPathPatterns.some((pattern) => lowerPathname.includes(pattern))) {
+            console.error("Blocked request due to disallowed path traversal sequence:", pathname);
+            return NextResponse.json({ error: "user_json_url path is not allowed." }, { status: 400 });
+        }
+
+        // Optionally, limit requests to specific path prefixes on the allowed host
+        const allowedPathPrefixes = ["/", "/verify", "/api"];
+        if (!allowedPathPrefixes.some((prefix) => pathname.startsWith(prefix))) {
+            console.error("Blocked request to disallowed path:", pathname);
+            return NextResponse.json({ error: "user_json_url path is not allowed." }, { status: 400 });
+        }
+
+        // Rebuild a safe URL using the validated origin and sanitized path/search
+        const safeUrl = new URL(pathname + validatedUrl.search, validatedUrl.origin);
 
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
         const API_KEY = process.env.PHONE_EMAIL_API_KEY;
