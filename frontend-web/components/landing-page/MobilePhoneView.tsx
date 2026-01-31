@@ -34,8 +34,8 @@ const MobilePhoneView = ({
     },
   },
   image = {
-    lightSrc: "responsive-light.jpg",
-    darkSrc: "responsive-dark.jpg",
+    lightSrc: "responsiveui-light.jpg",
+    darkSrc: "responsiveui-dark.jpg",
     alt: "Placeholder",
   },
   className,
@@ -73,7 +73,7 @@ const MobilePhoneView = ({
         <div className="relative z-10  flex justify-center">
           <div className="relative max-w-xs md:max-w-sm">
             <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-64 h-32 bg-gradient-to-t from-primary/40 to-transparent blur-2xl rounded-full" />
-            <div className="absolute top-2 left-1/2 h-[98%] w-[95%] -translate-x-1/2 overflow-hidden">
+            <div className="absolute top-2 left-1/2 h-[98%] w-[95%] -translate-x-1/2 overflow-hidden select-none">
               <img
                 src={resolvedTheme === "dark" ? image.darkSrc : image.lightSrc}
                 alt={image.alt}
@@ -81,7 +81,7 @@ const MobilePhoneView = ({
               />
             </div>
             <img
-              className="relative z-10 w-full h-auto max-w-[350px] md:max-w-[400px]"
+              className="relative z-10 w-full h-auto max-w-[350px] md:max-w-[400px] select-none"
               src="samsung-galaxy-s24-ultra-2024-medium.png"
               alt="phone"
             />
