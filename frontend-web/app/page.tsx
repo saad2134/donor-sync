@@ -6,13 +6,13 @@ import { createPortal } from "react-dom";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from '@/components/landing-page/BusinessNavbar';
-import AceBrandIntroSparkles1 from '@/components/landing-page/AceBrandIntroSparkles1';
-import HardToResist from '@/components/landing-page/HardToResist';
-import AceBeamCollisonDemo from '@/components/landing-page/AceBeamCollisonDemo';
-import AceAuroraBackgroundDemo from '@/components/landing-page/AceAuroraBackgroundDemo';
-import Accordion from '@/components/landing-page/faq-accordion';
+import HeroSparkles from '@/components/landing-page/HeroSparkles';
+import PlatformBenefits from '@/components/landing-page/PlatformBenefits';
+import Quote from '@/components/landing-page/Quote';
+import FinalCTA from '@/components/landing-page/FinalCTA';
 import Footer from '@/components/landing-page/footer';
-import PatientProcess from "@/components/landing-page/PatientProcess";
+import { MobilePhoneView } from "@/components/landing-page/MobilePhoneView";
+import FAQ from "@/components/landing-page/faq/default";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -27,16 +27,32 @@ export default function Home() {
     <ScrollArea className="h-screen">
       <BusinessNavbar />
 
-      <AceBrandIntroSparkles1 />
-      <HardToResist />
-      {/* <PatientProcess /> */}
-      <AceBeamCollisonDemo />
-      <AceAuroraBackgroundDemo />
-      <Accordion />
-      
+
+
+      <HeroSparkles />
+      <PlatformBenefits />
+      {/* <PlatformProcess /> */}
+
+      <MobilePhoneView />
+      <Quote />
+
+      <FAQ />
+
+      <FinalCTA /> 
+
+
+
       <Footer />
     </ScrollArea>
     </div>,
     document.body
   );
 }
+
+/* 
+
+https://www.shadcnblocks.com/block/process1
+https://www.shadcnblocks.com/block/compliance1
+
+
+*/

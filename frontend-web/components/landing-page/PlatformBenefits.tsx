@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-export default function HardToResist() {
+export default function PlatformBenefits() {
   const benefits = [{
     title: "Patients",
-    description: "Sign up and request the blood you need, we’ll help you find it quickly.",
+    description: "Sign up and request for blood you need, we'll help you find it quickly.",
     icon: "🩸"
   }, {
     title: "Donors",
@@ -12,7 +12,7 @@ export default function HardToResist() {
     icon: "❤️"
   }, {
     title: "Hospitals",
-    description: "Connect directly with donors to get the blood your patients need.",
+    description: "Connect directly with donors to get blood your patients need.",
     icon: "🏥"
   }, {
     title: "Organisations",

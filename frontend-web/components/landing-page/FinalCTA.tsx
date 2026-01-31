@@ -8,7 +8,7 @@ import { useUser } from "@/context/UserContext";
 import { motion } from "framer-motion";
 import React from "react";
 import AceAuroraBackground from "@/components/landing-page/AceAuroraBackground";
-export default function AuroraBackgroundDemo() {
+export default function FinalCTA() {
   const router = useRouter()
 
   const { role } = useUser();
@@ -33,7 +33,7 @@ export default function AuroraBackgroundDemo() {
           🩸 Are you willing to contribute for a better world?
           </div>
           <div className="font-extralight text-base md:text-2xl text-muted-foreground py-4 pl-20 pr-20 text-center">
-          Finding the right blood match shouldn’t be stressful. DonorSync connects you with hospitals and donors quickly, so you get the blood you need when you need it.
+          Finding the right blood match shouldn&apos;t be stressful. DonorSync connects you with hospitals and donors quickly, so you get the blood you need when you need it.
           </div>
           
           
@@ -49,7 +49,7 @@ export default function AuroraBackgroundDemo() {
           <span className="relative inline-flex h-full w-full items-center justify-center rounded-md dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[linear-gradient(110deg,#FFFFFF,45%,#E6E6E6,55%,#FFFFFF)]  bg-[length:200%_100%] animate-shimmer px-6 text-2xl text-slate-800 
           dark:text-slate-400 transition-colors">
 
-            
+             
             {buttonText}
           </span>
         </button>
