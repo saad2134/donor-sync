@@ -105,7 +105,7 @@ export default function FinalCTA() {
           >
             Finding the right blood match shouldn&apos;t be stressful.{" "}
             <span className="text-foreground font-semibold">{APP_CONFIG.appName}</span>{" "}
-            connects you with hospitals and donors quickly, so you get the blood you need when you need it.
+            connects you with hospitals and donors quickly, so you get the blood you need when you need it the most.
           </motion.p>
 
           <motion.div variants={itemVariants} className="pt-4 w-full flex justify-center">
