@@ -30,7 +30,7 @@
     "@tsparticles/slim": "^3.8.1",
     "@uploadcare/react-uploader": "^1.6.0",
     "@uploadthing/react": "^7.3.0",
-    "ai": "^4.2.6",
+    "ai": "^6.0.64",
     "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
