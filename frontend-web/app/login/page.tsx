@@ -29,6 +29,11 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
 
 async function getOnboardedStatus(role: string, userId: string) {
+  if (!db) {
+    console.error("Firebase Firestore not initialized");
+    return false;
+  }
+
   try {
     const userDocRef = doc(db, role, userId); // Reference to the document
     const userDocSnap = await getDoc(userDocRef); // Fetch the document

@@ -186,12 +186,17 @@ export default function NearbyDonationsPage() {
       return;
     }
 
+    if (!db) {
+      alert("Firebase not initialized");
+      return;
+    }
+
     setIsBooking(true);
     try {
       // Format appointment date and time for storage
       const formattedDate = format(date, "yyyy-MM-dd");
 
-      // Update the hospital request document
+      // Update hospital request document
       const requestRef = doc(db, "hospital-requests", selectedHospital.id);
       await updateDoc(requestRef, {
         bookedDonors: arrayUnion({

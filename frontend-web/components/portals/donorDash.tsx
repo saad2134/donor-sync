@@ -12,6 +12,11 @@ import { updateUserData } from "@/firebaseFunctions"
 
 // Fetch a single donor by userId
 export async function getDonorById(userId: string) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return null;
+    }
+
     try {
         const docRef = doc(db, "donors", userId);
         const docSnap = await getDoc(docRef);

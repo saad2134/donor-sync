@@ -68,7 +68,7 @@ export default function BloodInventoryPage() {
   const maxExpiryDate = addDays(new Date(), 30); // 1 month ahead
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId || !db) return;
 
     const fetchRequests = async () => {
       const requestsRef = collection(db, "hospital-requests");
@@ -100,6 +100,7 @@ export default function BloodInventoryPage() {
 
 
   const handleCreateRequest = async () => {
+    if (!db) return;
 
     if (!bloodGroupNeeded || !bloodQtyNeeded || !requestExpires) {
       toast({
@@ -154,6 +155,8 @@ export default function BloodInventoryPage() {
   };
 
   const handleCloseRequest = async (reqId) => {
+    if (!db) return;
+
     try {
       setLoading(true);
       const requestRef = doc(db, "hospital-requests", reqId);

@@ -29,7 +29,7 @@ export default function BloodInventoryPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId || !db) return;
 
     const fetchOrCreateInventory = async () => {
       const inventoryRef = doc(db, "hospital-blood-inventory", userId);
@@ -68,6 +68,7 @@ export default function BloodInventoryPage() {
   };
 
   const handleSave = async () => {
+    if (!db) return;
     const inventoryRef = doc(db, "hospital-blood-inventory", userId);
     await updateDoc(inventoryRef, inventory);
     setIsEditing(false);

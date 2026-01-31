@@ -186,6 +186,11 @@ export default function UrgentDonationsPage() {
       return;
     }
 
+    if (!db) {
+      alert("Firebase not initialized");
+      return;
+    }
+
     setIsBooking(true);
     try {
       // Format appointment date and time for storage

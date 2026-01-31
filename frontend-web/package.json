@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@google/generative-ai": "^0.24.0",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-avatar": "^1.1.3",

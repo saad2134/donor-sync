@@ -29,6 +29,11 @@ function generateUserId(): string {
 // if  no: create new collection in that role's doc with new userId and set LoginID into it.
 
 export async function loginUserDatabase(role: string, loginId: string) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return null;
+    }
+
     try {
         switch (role) {
             case "patient": {
@@ -155,6 +160,11 @@ export async function loginUserDatabase(role: string, loginId: string) {
 }
 
 export async function getUserDataById(userId: string, role: string) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return null;
+    }
+
     if (role == "patient") {
         try {
             const docRef = doc(db, "patients", userId);
@@ -228,6 +238,11 @@ export async function getUserDataById(userId: string, role: string) {
 
 // func to update data of a user/collection in their role's doc
 export async function updateUserData(role, userId, updateData) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return { success: false, message: "Firebase Firestore not initialized" };
+    }
+
     try {
         const userRef = doc(db, role, userId);
         const userSnap = await getDoc(userRef);
@@ -247,6 +262,11 @@ export async function updateUserData(role, userId, updateData) {
 
 
 export async function deleteUserById(userId: string, role: string) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return null;
+    }
+
     if (role == "patient") {
         try {
             const docRef = doc(db, "patients", userId);

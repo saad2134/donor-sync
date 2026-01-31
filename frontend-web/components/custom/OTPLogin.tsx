@@ -43,6 +43,8 @@ function OtpLogin() {
   }, [resendCountdown]);
 
   useEffect(() => {
+    if (!auth) return;
+
     const recaptchaVerifier = new RecaptchaVerifier(
       auth,
       "recaptcha-container",

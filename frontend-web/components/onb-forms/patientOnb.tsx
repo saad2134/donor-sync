@@ -14,6 +14,11 @@ import { updateUserData } from "@/firebaseFunctions"
 
 // Fetch a single patient by userId
 export async function getPatientById(userId: string) {
+    if (!db) {
+        console.error("Firebase Firestore not initialized");
+        return null;
+    }
+
     try {
         const docRef = doc(db, "patients", userId);
         const docSnap = await getDoc(docRef);
