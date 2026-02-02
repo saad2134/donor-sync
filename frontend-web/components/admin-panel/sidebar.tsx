@@ -39,7 +39,7 @@ export function Sidebar() {
               <img
                 src="/donor-sync-icon-rounder.svg"
                 className="h-11 w-11 min-w-[44px] min-h-[44px] flex-shrink-0"
-                alt="DonorSync Icon"
+                alt={`${APP_CONFIG.appName} Icon`}
               />
               <h1
                 className={cn(

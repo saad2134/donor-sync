@@ -303,7 +303,7 @@ export default function FooterSection({
         </Footer>
       </div>
       <div className="xl:h-[18rem] lg:h-[13rem] md:h-[10rem] h-[4rem] flex items-center justify-center">
-        <TextHoverEffect text="DONORSYNC" />
+        <TextHoverEffect text={APP_CONFIG.appName.toUpperCase()} />
       </div>
     </footer>
   );

@@ -14,7 +14,7 @@ import { APP_CONFIG, FAQ_CONFIG } from "@/config/CORE_CONFIG";
 export function FAQ() {
 
     return (
-        <section id='faqs' className="py-32 relative overflow-hidden">
+        <section id='faqs' className="py-48  relative overflow-hidden">
             {/* Animated background layers */}
             <div className="absolute inset-0">
                 {/* Gradient mesh background */}

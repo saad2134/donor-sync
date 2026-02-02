@@ -7,7 +7,7 @@ export const APP_CONFIG = {
   getStartedUrl: "/login",
   contacts: {
     email: "mailto:reach.saad@outlook.com",
-    phone: "",
+    phone: "tel:",
   },
 };
 

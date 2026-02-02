@@ -19,8 +19,8 @@ export default function PlatformBenefits() {
     description: "Organize donation drives and support those in urgent need.",
     icon: "🤝"
   }];
-  return <section className="relative pt-24 pb-20">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
+  return <section className="relative pt-40 pb-20 px-4">
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent px-8" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{
@@ -32,7 +32,7 @@ export default function PlatformBenefits() {
       }} transition={{
         duration: 0.2
       }} className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
               We connect
             </span>{" "}

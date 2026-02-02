@@ -31,7 +31,7 @@ export function SheetMenu() {
               <img
                 src="/donor-sync-icon-rounder.svg"
                 className="h-11 w-11 min-w-[44px] min-h-[44px] flex-shrink-0"
-                alt="DonorSync Icon"
+                alt={`${APP_CONFIG.appName} Icon`}
               />
 
               <SheetTitle className="font-bold text-lg pr-4">{APP_CONFIG.appName}</SheetTitle>

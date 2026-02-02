@@ -37,9 +37,9 @@ export default function FinalCTA() {
   };
 
   return (
-    <div className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden pb-20 overflow-x-hidden">
+    <div className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden py-24 pb-48 overflow-x-hidden ">
       <AceAuroraBackground>
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 ">
           <motion.div
             className="absolute top-[15%] left-[5%] h-28 w-28 rounded-full bg-primary/20 blur-2xl"
             animate={{

@@ -13,6 +13,7 @@ import FinalCTA from '@/components/landing-page/FinalCTA';
 import Footer from '@/components/landing-page/footer';
 import { MobilePhoneView } from "@/components/landing-page/MobilePhoneView";
 import FAQ from "@/components/landing-page/faq/default";
+import MagicBento from '@/components/MagicBento'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -29,17 +30,31 @@ export default function Home() {
 
 
       <HeroSparkles />
-        <PlatformBenefits />
-        {/* <PlatformProcess /> */}
+      <PlatformBenefits />
+      {/* <PlatformProcess /> */}
+      <MagicBento
+        textAutoHide={true}
+        enableStars
+        enableSpotlight
+        enableBorderGlow={true}
+        enableTilt={true}
+        enableMagnetism={false}
+        clickEffect
+        spotlightRadius={400}
+        particleCount={12}
+        glowColor="255, 0, 0"
+        disableAnimations={false}
+      />
+
       <MobilePhoneView />
       <Quote />
       <FAQ />
-        <FinalCTA /> 
+      <FinalCTA />
 
 
       <Footer />
     </ScrollArea>
-    </div>,
+  </div>,
     document.body
   );
 }
