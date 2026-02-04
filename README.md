@@ -54,15 +54,36 @@
 
 ## 🛠 Tech Stack *
 
-- React + NextJS + TailwindCSS + TypeScript
-- shadcn/ui & AceternityUI for UI components
-- [Phone Email](https://phone.email) for Email & Phone Verification
-- [Uploadcare](https://uploadcare.com/) for File Storage
-- Database Management System - Firestore NoSQL Database
-- [Vercel](https://vercel.com/) for Hosting
-- [Apps Script](https://script.google.com/) for Feedback Collection 
-- Gemeni API for Syncbot Chatbot
-- [Firebase Studio](https://firebase.studio/) (formerly Project IDX) as a IDE
+```mermaid
+flowchart LR
+    %% Frontend
+    subgraph Frontend
+        FE[React + Next.js<br>TypeScript + TailwindCSS<br>shadcn/ui + AceternityUI<br>
+        Vercel Hosting<br>
+        Developed in 
+        Firebase Studio IDE]
+         
+    end
+
+    %% Backend Services
+    subgraph Backend_Services["Backend Services"]
+        VERIFY[Phone Email<br>Email & Phone Verification]
+        STORAGE[Uploadcare<br>File Storage]
+        DB[Firestore<br>NoSQL Database]
+        FEEDBACK[Google Apps Script<br>Feedback Collection]
+        BOT[Gemini API<br>Syncbot Chatbot]
+  
+    end
+
+    %% Connections
+    FE <--> VERIFY
+    FE <--> STORAGE
+    FE <--> DB
+    FE <--> BOT
+    FE <--> FEEDBACK
+
+
+```
 
 ## 🚀 Getting Started *
 
