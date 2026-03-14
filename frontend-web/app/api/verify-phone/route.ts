@@ -8,6 +8,24 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Missing user_json_url." }, { status: 400 });
         }
 
+        // Validate and restrict the URL to prevent SSRF
+        let verifiedUrl: URL;
+        try {
+            verifiedUrl = new URL(user_json_url);
+        } catch {
+            return NextResponse.json({ error: "Invalid user_json_url format." }, { status: 400 });
+        }
+
+        // Allow-list of trusted verification API hosts
+        const ALLOWED_HOSTS = ["trusted-verification.example.com"];
+
+        if (
+            (verifiedUrl.protocol !== "https:" && verifiedUrl.protocol !== "http:") ||
+            !ALLOWED_HOSTS.includes(verifiedUrl.hostname)
+        ) {
+            return NextResponse.json({ error: "user_json_url is not allowed." }, { status: 400 });
+        }
+
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
         const API_KEY = process.env.PHONE_EMAIL_API_KEY;
 
@@ -17,7 +35,7 @@ export async function POST(req: Request) {
         }
 
         // Fetch user details from the verification API
-        const response = await fetch(user_json_url, {
+        const response = await fetch(verifiedUrl.toString(), {
             headers: {
                 "Authorization": `Bearer ${API_KEY}`,
                 "Content-Type": "application/json",
