@@ -50,7 +50,7 @@
 | Platform                                                       | Supported? |
 | --------------------------------------------------------------- | ----------- |
 | Web (any browser with JS functionality) + Fully Responsive       | ✅          |
-| [Android](frontend-android/) (non-natively through WebView)                | ✅          |
+| [Android](android/) (non-natively through WebView)                | ✅          |
 
 ## 🛠 Tech Stack *
 
@@ -120,7 +120,7 @@ flowchart LR
 ```
 donor-sync/
 └── README.md & LICENSE etc.
-└── frontend-web/
+└── web/  # Frontend Web
     ├── app/
     │   └── …                     # Top-level Next.js app directory (routes, layouts, pages, etc.)
     ├── components/
