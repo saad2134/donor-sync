@@ -11,7 +11,8 @@ export async function POST(req: Request) {
         // Validate user_json_url to prevent Server-Side Request Forgery (SSRF)
         try {
             const parsedUrl = new URL(user_json_url);
-            if (parsedUrl.protocol !== "https:" || parsedUrl.hostname !== "auth.phone.email") {
+            const isValidDomain = parsedUrl.hostname === "phone.email" || parsedUrl.hostname.endsWith(".phone.email");
+            if (parsedUrl.protocol !== "https:" || !isValidDomain) {
                 return NextResponse.json({ error: "Invalid user_json_url domain." }, { status: 400 });
             }
         } catch (e) {
