@@ -8,6 +8,16 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Missing user_json_url." }, { status: 400 });
         }
 
+        // Validate user_json_url to prevent Server-Side Request Forgery (SSRF)
+        try {
+            const parsedUrl = new URL(user_json_url);
+            if (parsedUrl.protocol !== "https:" || parsedUrl.hostname !== "auth.phone.email") {
+                return NextResponse.json({ error: "Invalid user_json_url domain." }, { status: 400 });
+            }
+        } catch (e) {
+            return NextResponse.json({ error: "Invalid user_json_url format." }, { status: 400 });
+        }
+
         // ❌ Do NOT use `NEXT_PUBLIC_` for private API keys (public keys)
         const API_KEY = process.env.PHONE_EMAIL_API_KEY;
         const CLIENT_ID = process.env.PHONE_EMAIL_CLIENT_ID;

@@ -58,7 +58,7 @@ async function getOnboardedStatus(role: string, userId: string) {
 const PatientContent: React.FC = () => {
   const { setUser } = useUser();
   const router = useRouter();
-  const [content, setContent] = useState<JSX.Element | null>(null);
+  const [content, setContent] = useState<React.ReactNode>(null);
 
   let isProcessing = false;
 
@@ -126,7 +126,7 @@ const PatientContent: React.FC = () => {
 const DonorContent: React.FC = () => {
   const { setUser } = useUser();
   const router = useRouter();
-  const [content, setContent] = useState<JSX.Element | null>(null);
+  const [content, setContent] = useState<React.ReactNode>(null);
 
   let isProcessing = false;
 
@@ -194,7 +194,7 @@ const DonorContent: React.FC = () => {
 const HospitalContent: React.FC = () => {
   const { setUser } = useUser();
   const router = useRouter();
-  const [content, setContent] = useState<JSX.Element | null>(null);
+  const [content, setContent] = useState<React.ReactNode>(null);
 
   let isProcessing = false;
 
@@ -259,7 +259,7 @@ const HospitalContent: React.FC = () => {
 const OrganisationContent: React.FC = () => {
   const { setUser } = useUser();
   const router = useRouter();
-  const [content, setContent] = useState<JSX.Element | null>(null);
+  const [content, setContent] = useState<React.ReactNode>(null);
 
   let isProcessing = false;
 
