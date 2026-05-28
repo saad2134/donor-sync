@@ -1,129 +1,126 @@
+// app/contact/page.tsx
+import ClientPortal from "@/components/ClientPortal";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import BusinessNavbar from "@/components/landing-page/BusinessNavbar";
 import Footer from "@/components/landing-page/footer";
-import Navbar from "@/components/landing-page/BusinessNavbar";
 import { ContactForm } from "@/components/landing-page/contact-form";
 import { APP_CONFIG } from "@/config/CORE_CONFIG";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Mail, Clock, HeartHandshake } from "lucide-react";
 
 export const metadata = {
   title: `Contact Us | ${APP_CONFIG.appName}`,
   description: `Get in touch with the ${APP_CONFIG.appName} team for support, inquiries, or collaboration opportunities.`,
 };
 
-export default async function Contact() {
+export default function Contact() {
   return (
-    <main className="min-h-screen w-full overflow-hidden bg-background text-foreground ">
-      <Navbar />
+    <ClientPortal>
+      <ScrollArea className="h-screen absolute-0 bg-gradient-to-b from-background via-background/95 to-background">
+        <BusinessNavbar />
 
-      <section className="mx-auto  px-6 py-12 pt-40 md:pt-48 sm:gap-48 pb-40 absolute-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 flex justify-center items-center">
-        <div className="max-w-6xl">
-          {/* Background gradient overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none z-[-1]"
-            style={{
-              background: 'linear-gradient(to right, var(--primary) 0%, transparent 50%, var(--primary) 100%)',
-              opacity: 0.5
-            }}
-          />
+        {/* Hero Section */}
+        <div className="relative overflow-hidden pt-32 pb-16 lg:pt-40 lg:pb-20">
+          {/* Background decorative blobs */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Any Issues? Want to Partner with us? Let's discuss how we can collaborate for the greater good.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-1 gap-12">
-              {/* Contact Information */}
-              <div className="lg:col-span-1 space-y-8">
-                <div>
-                  <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
-                  <p className="text-muted-foreground mb-6">
-                    Any queries or support needed? Interested in a partnership? Reach out and our team will get back to you within 24 hours.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary/10 p-2 rounded-lg">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div className="space-y-6">
-                      <h3 className="font-semibold mb-4">Email Us</h3>
-                      <div>
-                        <p className="text-muted-foreground">For all inquiries:</p>
-                        <a
-                          href="mailto:reach.saad@outlook.com"
-                          className="text-primary hover:underline font-medium"
-                        >
-                          reach.saad@outlook.com
-                        </a>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  {/* <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-2 rounded-lg">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-2 rounded-lg">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Offices</h3>
-
-                </div>
-              </div> */}
-                </div>
-
-                <div className="bg-muted/50 p-6 rounded-lg relative overflow-hidden group hover:scale-105 transition-transform duration-300 ease-out">
-                  {/* Slow shine effect */}
-                  <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-0 left-0 w-30 h-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent transform -skew-x-12 animate-slow-shine"></div>
-                  </div>
-
-                  <div className="relative z-10">
-                    <h3 className="font-semibold mb-2">Response Time</h3>
-                    <p className="text-sm text-muted-foreground">
-                      We typically respond to all inquiries within 24 hours during business days.
-                      For urgent matters, please include "URGENT" in your subject line.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Form 
-          <div className="lg:col-span-2">
-            <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
-              <h2 className="text-2xl font-semibold mb-2">Send us a Message</h2>
-              <p className="text-muted-foreground mb-8">
-                Tell us about your project or inquiry and we'll get back to you soon.
-              </p>
-
-              <ContactForm />
-            </div>
-          </div>*/}
-            </div>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300">
+              Contact Us
+            </Badge>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight bg-gradient-to-r from-foreground via-foreground/90 to-foreground/75 bg-clip-text text-transparent">
+              Let&apos;s Start a <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Conversation</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Have questions about integrating with your hospital system, partnership options, or need technical support? We&apos;d love to hear from you.
+            </p>
           </div>
         </div>
-      </section>
 
-      <Footer />
-    </main>
+        {/* Content Layout */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Side: Contact Information Cards */}
+            <div className="lg:col-span-5 space-y-6">
+              
+              {/* Email Card */}
+              <Card className="border border-border/40 bg-card hover:bg-primary/[0.01] transition-all duration-300 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-[3px] h-full bg-primary" />
+                <CardContent className="p-8 space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">Email Directly</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    For general support, media inquiries, or institutional onboarding questions, drop us an email.
+                  </p>
+                  <div className="pt-2">
+                    <a
+                      href="mailto:reach.saad@outlook.com"
+                      className="text-lg font-semibold text-primary hover:underline flex items-center gap-2"
+                    >
+                      reach.saad@outlook.com
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Response Time Card */}
+              <Card className="border border-border/40 bg-card hover:bg-primary/[0.01] transition-all duration-300 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-[3px] h-full bg-yellow-500" />
+                <CardContent className="p-8 space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-500" />
+                  </div>
+                  <h3 className="text-xl font-bold">Typical Response Time</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    We typically respond to all inquiries within <strong>24 hours</strong> during business days. For urgent matters, please append &quot;URGENT&quot; to your subject.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Partnership Card */}
+              <Card className="border border-border/40 bg-card hover:bg-primary/[0.01] transition-all duration-300 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-primary to-secondary" />
+                <CardContent className="p-8 space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <HeartHandshake className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">Partnerships &amp; Drives</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Want to coordinate blood donation drives or integrate DonorSync features into your non-profit/NGO portal? Reach out to collaborate!
+                  </p>
+                </CardContent>
+              </Card>
+
+            </div>
+
+            {/* Right Side: Contact Form Card */}
+            <div className="lg:col-span-7">
+              <Card className="border border-border/50 bg-gradient-to-b from-card to-muted/10 shadow-lg shadow-primary/[0.02]">
+                <CardContent className="p-8 sm:p-10 space-y-8">
+                  <div className="space-y-2">
+                    <h2 className="text-2xl font-bold tracking-tight">Send us a Message</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Complete the form below to get in touch. We will review your submission and contact you promptly.
+                    </p>
+                  </div>
+                  
+                  <div className="border-t border-border/40 pt-6">
+                    <ContactForm />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+          </div>
+        </div>
+
+        <Footer />
+      </ScrollArea>
+    </ClientPortal>
   );
 }

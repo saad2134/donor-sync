@@ -4,16 +4,18 @@ import * as React from "react"
 import { useState } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Moon, Sun, ArrowLeft } from "lucide-react"
+import { Moon, Sun, ArrowLeft, Activity, Heart, Building2, Users as UsersIcon } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import RoleCard from "@/components/ui/rolecard"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { motion, AnimatePresence } from "framer-motion"
 import { Variants } from "framer-motion";
+import Image from "next/image"
 
 import HeartLoading from "@/components/custom/HeartLoading"; // <HeartLoading />
 
@@ -23,10 +25,11 @@ import PEEmailButton from "@/components/custom/PEEmailButton"
 //User Account 
 import { useEffect } from "react";
 import { useUser } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { loginUserDatabase } from "@/firebaseFunctions";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
+import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 async function getOnboardedStatus(role: string, userId: string) {
   if (!db) {
@@ -97,17 +100,19 @@ const PatientContent: React.FC = () => {
 
   function defaultUI() {
     return (
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Welcome, Patient!</h1>
-        <p className="mb-4">
-          Here you can request/find blood.
-        </p>
-        <form>
-          <div className="flex justify-center items-center w-full h-full">
+      <div className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">Welcome, Patient!</h2>
+          <p className="text-sm text-muted-foreground">
+            Search, match, and request blood access during emergencies.
+          </p>
+        </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="flex justify-center items-center w-full py-4">
             <PEPhoneButton onVerify={handleVerificationSuccess} />
           </div>
         </form>
-      </div >
+      </div>
     )
   }
 
@@ -160,11 +165,15 @@ const DonorContent: React.FC = () => {
 
   function defaultUI() {
     return (
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Welcome, Donor!</h1>
-        <p className="mb-4">Here you can donate blood.</p>
-        <form>
-          <div className="flex justify-center items-center w-full h-full">
+      <div className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">Welcome, Donor!</h2>
+          <p className="text-sm text-muted-foreground">
+            Register your profile to receive nearby blood requests and track your lifesaving impact.
+          </p>
+        </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="flex justify-center items-center w-full py-4">
             <PEPhoneButton onVerify={handleVerificationSuccess} />
           </div>
         </form>
@@ -221,17 +230,21 @@ const HospitalContent: React.FC = () => {
 
   function defaultUI() {
     return (
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Registering as a Hospital 🏥</h1>
-        <p className="mb-4">
-          Connect directly with donors to get the blood your patients need.
-        </p>
-        <form>
-          <div className="flex justify-center items-center w-full h-full pb-4">
+      <div className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">Hospital Registry 🏥</h2>
+          <p className="text-sm text-muted-foreground">
+            Coordinate inventories and match requests directly with nearby donors.
+          </p>
+        </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="flex justify-center items-center w-full py-4">
             <PEEmailButton onVerify={handleVerificationSuccess} />
           </div>
         </form>
-        <p className="text-gray-500 text-sm">Only professional emails allowed. No @gmail, @outlook, etc. Personal emails are currently allowed for testing.</p>
+        <p className="text-muted-foreground text-xs leading-relaxed bg-muted/50 p-3 rounded-lg border border-border/40">
+          Only institutional email domains are authorized (e.g. hospital domain). Personal email providers are enabled for preview purposes.
+        </p>
       </div>
     );
   }
@@ -282,17 +295,21 @@ const OrganisationContent: React.FC = () => {
 
   function defaultUI() {
     return (
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Registering as an Organisation/NGO 👥</h1>
-        <p className="mb-4">
-          Organize donation drives and support those in urgent need.
-        </p>
-        <form>
-          <div className="flex justify-center items-center w-full h-full pb-4">
+      <div className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">NGO &amp; Organisation Registry 👥</h2>
+          <p className="text-sm text-muted-foreground">
+            Sponsor local events, manage donation drives, and coordinate public health networks.
+          </p>
+        </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="flex justify-center items-center w-full py-4">
             <PEEmailButton onVerify={handleVerificationSuccess} />
           </div>
         </form>
-        <p className="text-gray-500 text-sm">Only professional emails allowed. No @gmail, @outlook, etc. Personal emails are currently allowed for testing.</p>
+        <p className="text-muted-foreground text-xs leading-relaxed bg-muted/50 p-3 rounded-lg border border-border/40">
+          Only organization domains are authorized. Personal email providers are enabled for preview testing.
+        </p>
       </div>
     );
   }
@@ -313,28 +330,39 @@ const OrganisationContent: React.FC = () => {
 const items = [
   {
     title: "Continue as Patient",
-    description:
-      "Sign up to quickly request blood!",
+    description: "Sign up to quickly request blood!",
     image: "/cs_patient.webp",
+    icon: Activity,
+    color: "text-red-500",
+    bgColor: "bg-red-500/10 border-red-500/20",
+    hoverColor: "hover:border-red-500/30 hover:shadow-red-500/5 hover:bg-red-500/[0.02]"
   },
   {
     title: "Continue as Donor",
-    description:
-      "Register to see where your donation saves lives.",
+    description: "Register to see where your donation saves lives.",
     image: "/cs_donor.webp",
-  }
-  ,
+    icon: Heart,
+    color: "text-rose-500",
+    bgColor: "bg-rose-500/10 border-rose-500/20",
+    hoverColor: "hover:border-rose-500/30 hover:shadow-rose-500/5 hover:bg-rose-500/[0.02]"
+  },
   {
     title: "Continue as Hospital",
-    description:
-      "Connect directly with donors to get the blood your patients need.",
+    description: "Connect directly with donors to get the blood your patients need.",
     image: "/cs_hospital.webp",
+    icon: Building2,
+    color: "text-blue-500",
+    bgColor: "bg-blue-500/10 border-blue-500/20",
+    hoverColor: "hover:border-blue-500/30 hover:shadow-blue-500/5 hover:bg-blue-500/[0.02]"
   },
   {
     title: "Continue as Organisation/NGO",
-    description:
-      "Organize donation drives & support those in urgent need.",
+    description: "Organize donation drives & support those in urgent need.",
     image: "/cs_organisation.webp",
+    icon: UsersIcon,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10 border-emerald-500/20",
+    hoverColor: "hover:border-emerald-500/30 hover:shadow-emerald-500/5 hover:bg-emerald-500/[0.02]"
   },
 ]
 
@@ -365,17 +393,34 @@ const RoleContent: React.FC<RoleContentProps> = ({ role }) => {
   }
 }
 
-
-
-
-
 // ---------------- DEFAULT FUNCTION THAT BRINGS EVERYTHING TOGETHER AND HANDLES ROLE SELECTION --------------------
 // -------------------& TRANSITION TO ROLE LOGIN PAGE CONTENT ----------------------------
 
-export default function LoginPage() {
+function LoginContent() {
   const { setTheme } = useTheme()
   const [selectedRole, setSelectedRole] = useState<null | typeof items[0]>(null)
   const [direction, setDirection] = useState(1)
+  const searchParams = useSearchParams()
+  const roleParam = searchParams.get("role")
+
+  useEffect(() => {
+    if (roleParam) {
+      let targetRole = null;
+      if (roleParam === "hospital") {
+        targetRole = items.find(item => item.title === "Continue as Hospital");
+      } else if (roleParam === "donor") {
+        targetRole = items.find(item => item.title === "Continue as Donor");
+      } else if (roleParam === "patient") {
+        targetRole = items.find(item => item.title === "Continue as Patient");
+      } else if (roleParam === "organisation" || roleParam === "ngo") {
+        targetRole = items.find(item => item.title === "Continue as Organisation/NGO");
+      }
+      
+      if (targetRole) {
+        setSelectedRole(targetRole);
+      }
+    }
+  }, [roleParam]);
 
   const handleRoleSelect = (role: typeof items[0]) => {
     setDirection(1)
@@ -404,29 +449,32 @@ export default function LoginPage() {
 
   // Define variants with explicit transitions.
   const roleSelectionVariants: Variants = {
-    initial: (dir: number) => (dir === -1 ? { x: "-100%" } : { x: 0 }),
+    initial: { opacity: 0, scale: 0.95 },
     animate: {
-      x: 0,
-      transition: { type: "tween", duration: 0.1, ease: "easeInOut" },
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.2, ease: "easeOut" },
     },
     exit: {
-      x: "-100%",
-      transition: { type: "tween", duration: 0.1, ease: "easeInOut" },
+      opacity: 0,
+      scale: 0.95,
+      transition: { duration: 0.15, ease: "easeIn" },
     },
   }
 
   const newScreenVariants: Variants = {
-    initial: { x: "100%" },
+    initial: { opacity: 0, scale: 0.95 },
     animate: {
-      x: 0,
-      transition: { type: "tween", duration: 0.1, ease: "easeInOut" },
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.2, ease: "easeOut" },
     },
     exit: {
-      x: "100%",
-      transition: { type: "tween", duration: 0.1, ease: "easeInOut" },
+      opacity: 0,
+      scale: 0.95,
+      transition: { duration: 0.15, ease: "easeIn" },
     },
   }
-
 
   const { setUser } = useUser();
 
@@ -437,14 +485,17 @@ export default function LoginPage() {
     router.push("/app");
   }
 
-  return (<>
+  return (
+    <div className="relative flex min-h-screen flex-col items-center justify-center px-8 py-16 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background select-none">
+      {/* Background glowing blobs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
 
-    <div className="relative flex min-h-screen flex-col items-center justify-center p-4 select-none overflow-hidden">
       {/* Theme Toggler at top right */}
-      <div className="absolute top-0 right-0 p-4">
+      <div className="absolute top-0 right-0 p-4 z-50">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" className="hover:bg-muted/50 border-border/60 transition-all">
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
@@ -464,62 +515,144 @@ export default function LoginPage() {
         </DropdownMenu>
       </div>
 
-      {/* Animate between screens */}
-      <AnimatePresence mode="wait">
-        {selectedRole === null ? (
-          // Role selection screen
-          <motion.div
-            key="role-selection"
-            custom={direction}
-            variants={roleSelectionVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="absolute w-full left-0 "
-          >
-            <div className="max-w-6xl mx-auto p-5 md:p-8 gap-5 md:gap-8 grid grid-cols-1">
-              {items.map((item, i) => (
-                <RoleCard
-                  key={i}
-                  image={item.image}
-                  title={item.title}
-                  description={item.description}
-                  onClick={() => handleRoleSelect(item)}
-                />
-              ))}
-            </div>
-          </motion.div>
-        ) : (
-          // New screen for the selected role.
-          <motion.div
-            key="new-screen"
-            variants={newScreenVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="absolute w-screen flex flex-col items-center justify-center p-10"
-          >
-            {/* Wrap content in a centered container */}
-            <div className="relative max-w-6xl mx-auto">
-              <RoleContent role={selectedRole} />
-              <div className="absolute top-[-50px] left-0">
-                <Button
-                  className="text-fg bg-bg border border-border focus:outline-none hover:bg-accent font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-background dark:text-foreground dark:border-border dark:hover:bg-accent"
-                  onClick={handleGoBack}
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Go Back
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Centered Glass Container Card */}
+      <Card className={`w-full ${selectedRole === null ? 'max-w-6xl' : 'max-w-lg'} border border-border/50 bg-card/60 backdrop-blur-lg shadow-2xl relative z-10 overflow-hidden min-h-[500px] flex flex-col transition-all duration-300 ease-in-out`}>
+        {/* Glowing top line */}
+        <div className="absolute top-0 left-0 w-full h-[2.5px] bg-gradient-to-r from-primary via-secondary to-primary/80" />
 
+        <div className="p-8 sm:p-10 flex-grow flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            {selectedRole === null ? (
+              // Role selection screen
+              <motion.div
+                key="role-selection"
+                variants={roleSelectionVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="space-y-8 flex flex-col justify-center h-full w-full"
+              >
+                {/* Brand Header */}
+                <div className="text-center space-y-3">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto shadow-md">
+                    <Heart className="w-7 h-7 text-primary animate-pulse" />
+                  </div>
+                  <div className="space-y-1">
+                    <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 bg-clip-text text-transparent">
+                      Continue to {APP_CONFIG.appName}
+                    </h1>
+                    <p className="text-sm text-muted-foreground">
+                      Select your registry type to manage or request blood access.
+                    </p>
+                  </div>
+                </div>
 
+                {/* Role Options Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {items.map((item, i) => {
+                    return (
+                      <div
+                        key={i}
+                        onClick={() => handleRoleSelect(item)}
+                        className={`flex flex-col border rounded-2xl cursor-pointer select-none transition-all duration-300 bg-card/50 overflow-hidden ${item.hoverColor} group h-full`}
+                      >
+                        {/* Card Image Area */}
+                        <div className="relative w-full h-44 overflow-hidden bg-muted/20 border-b border-border/10 flex-shrink-0">
+                          <div className="absolute inset-4">
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              fill
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                              className="object-contain group-hover:scale-105 transition-transform duration-500 select-none"
+                              draggable={false}
+                              onDragStart={(e) => e.preventDefault()}
+                              onContextMenu={(e) => e.preventDefault()}
+                            />
+                          </div>
+                        </div>
 
+                        {/* Card Content Area */}
+                        <div className="p-5 flex flex-col flex-grow justify-between space-y-4">
+                          <div className="space-y-2 text-left">
+                            <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-snug">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm text-muted-foreground leading-normal">
+                              {item.description}
+                            </p>
+                          </div>
+
+                          {/* Bottom CTA / Action */}
+                          <div className="flex items-center text-sm font-semibold text-primary/80 group-hover:text-primary transition-colors duration-300 mt-auto pt-2 gap-1.5">
+                            <span>Continue</span>
+                            <ArrowLeft className="w-4 h-4 rotate-180 transform group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            ) : (
+              // Form screen for the selected role
+              <motion.div
+                key="new-screen"
+                variants={newScreenVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="space-y-6 flex flex-col justify-center h-full w-full relative"
+              >
+                {/* Back Button inside the card header */}
+                <div className="flex items-center justify-between border-b border-border/40 pb-4 mb-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hover:bg-muted/50 text-muted-foreground hover:text-foreground font-medium rounded-lg text-xs gap-1.5 px-3 py-1.5"
+                    onClick={handleGoBack}
+                  >
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                    Change Role
+                  </Button>
+                  
+                  {/* Miniature Indicator of selected role */}
+                  <Badge variant="secondary" className={`font-semibold text-xs px-2.5 py-0.5 border ${selectedRole.bgColor} flex items-center gap-1.5`}>
+                    {React.createElement(selectedRole.icon, { className: `w-3 h-3 ${selectedRole.color}` })}
+                    <span>{selectedRole.title.replace("Continue as ", "")}</span>
+                  </Badge>
+                </div>
+
+                <div className="pt-2 text-left">
+                  <RoleContent role={selectedRole} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </Card>
+
+      {/* Back to Home button */}
+      <Button
+        variant="link"
+        onClick={() => router.push("/")}
+        className="mt-6 text-zinc-700 hover:text-foreground transition-colors duration-200 flex items-center gap-2 text-sm hover:no-underline relative z-10"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Home
+      </Button>
     </div>
+  )
+}
 
-  </>
+export default function LoginPage() {
+  return (
+    <React.Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center">
+        <HeartLoading />
+      </div>
+    }>
+      <LoginContent />
+    </React.Suspense>
   )
 }

@@ -11,7 +11,7 @@ import { APP_CONFIG } from "@/config/CORE_CONFIG";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: `${APP_CONFIG.appName} ✦ Blood Donation Platform`,
+  title: `${APP_CONFIG.appName} | Blood Donation Platform`,
   description: `${APP_CONFIG.appDescription}`,
 };
 

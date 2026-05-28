@@ -1,3 +1,4 @@
+// app/status/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,9 +6,10 @@ import ClientPortal from "@/components/ClientPortal";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BusinessNavbar from "@/components/landing-page/BusinessNavbar";
 import Footer from "@/components/landing-page/footer";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { RefreshCw, CheckCircle2, XCircle, AlertTriangle, Info, Server } from "lucide-react";
 import { APP_CONFIG } from "@/config/CORE_CONFIG";
 
 interface ServiceStatus {
@@ -51,17 +53,24 @@ export default function StatusPage() {
   const hasIssues = data?.status === 'issues';
 
   const getStatusColor = () => {
-    if (loading) return 'bg-muted-100 dark:bg-muted-900/30';
-    if (allOperational) return 'bg-green-100 dark:bg-green-900/30';
-    if (hasIssues) return 'bg-yellow-100 dark:bg-yellow-900/30';
-    return 'bg-red-100 dark:bg-red-900/30';
+    if (loading) return 'border-muted/30 bg-muted/[0.03] text-muted-foreground';
+    if (allOperational) return 'border-green-500/20 bg-green-500/[0.03] text-green-500';
+    if (hasIssues) return 'border-yellow-500/20 bg-yellow-500/[0.03] text-yellow-500';
+    return 'border-red-500/20 bg-red-500/[0.03] text-red-500';
+  };
+
+  const getStatusShadow = () => {
+    if (loading) return '';
+    if (allOperational) return 'shadow-xl shadow-green-500/[0.02] dark:shadow-green-500/[0.03]';
+    if (hasIssues) return 'shadow-xl shadow-yellow-500/[0.02] dark:shadow-yellow-500/[0.03]';
+    return 'shadow-xl shadow-red-500/[0.02] dark:shadow-red-500/[0.03]';
   };
 
   const getStatusIcon = () => {
-    if (loading) return <RefreshCw className="w-8 h-8 text-muted-600 dark:text-muted-400 animate-spin" />;
-    if (allOperational) return <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />;
-    if (hasIssues) return <AlertTriangle className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />;
-    return <XCircle className="w-8 h-8 text-red-600 dark:text-red-400" />;
+    if (loading) return <RefreshCw className="w-6 h-6 text-muted-500 animate-spin" />;
+    if (allOperational) return <CheckCircle2 className="w-6 h-6 text-green-500" />;
+    if (hasIssues) return <AlertTriangle className="w-6 h-6 text-yellow-500" />;
+    return <XCircle className="w-6 h-6 text-red-500" />;
   };
 
   const getStatusText = () => {
@@ -73,81 +82,128 @@ export default function StatusPage() {
 
   return (
     <ClientPortal>
-      <ScrollArea className="h-screen bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
+      <ScrollArea className="h-screen absolute-0 bg-gradient-to-b from-background via-background/95 to-background">
         <BusinessNavbar />
 
-        <div className="max-w-4xl mx-auto p-8 pt-32 pb-20">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2">System Status</h1>
-            <p className="text-muted-foreground">Real-time status of all {APP_CONFIG.appName} services and dependencies.</p>
-          </div>
+        {/* Hero Section */}
+        <div className="relative overflow-hidden pt-32 pb-12 lg:pt-40 lg:pb-16">
+          {/* Background decorative blobs */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <Card className="p-6 mb-6 border-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-full ${getStatusColor()}`}>
-                  {getStatusIcon()}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300">
+              System Status
+            </Badge>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight bg-gradient-to-r from-foreground via-foreground/90 to-foreground/75 bg-clip-text text-transparent">
+              Live Infrastructure Monitor
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Real-time checkups of all {APP_CONFIG.appName} microservices, databases, and third-party APIs.
+            </p>
+          </div>
+        </div>
+
+        {/* Content Layout */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+          
+          {/* Overall Health Panel */}
+          <Card className={`border ${getStatusColor()} ${getStatusShadow()} transition-all duration-500 mb-8`}>
+            <CardContent className="p-8">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-5 text-center sm:text-left flex-col sm:flex-row">
+                  <div className={`w-14 h-14 rounded-2xl bg-card border border-border flex items-center justify-center shadow-md relative`}>
+                    {getStatusIcon()}
+                    {!loading && allOperational && (
+                      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-green-500"></span>
+                      </span>
+                    )}
+                  </div>
+                  <div className="space-y-1">
+                    <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                      {getStatusText()}
+                    </h2>
+                    <p className="text-muted-foreground text-sm">
+                      {lastChecked ? `Last synchronized: ${lastChecked}` : 'Connecting to gateway...'}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-2xl font-semibold text-foreground">
-                    {getStatusText()}
-                  </h2>
-                  <p className="text-muted-foreground text-sm">
-                    {lastChecked ? `Last checked: ${lastChecked}` : 'Loading...'}
-                  </p>
-                </div>
+                <Button
+                  onClick={fetchStatus}
+                  disabled={loading}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 bg-card hover:bg-muted/50 border-border/60 hover:border-border transition-all w-full sm:w-auto"
+                >
+                  <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                  Check Now
+                </Button>
               </div>
-              <Button
-                onClick={fetchStatus}
-                disabled={loading}
-                variant="outline"
-                size="sm"
-                className="gap-2"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                Refresh
-              </Button>
-            </div>
+            </CardContent>
           </Card>
 
-          <div className="space-y-3">
+          {/* Individual Service list */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 px-1 text-sm font-semibold text-muted-foreground">
+              <Server className="w-4 h-4" />
+              <span>Service Registry Status</span>
+            </div>
+            
             {loading && !data ? (
-              <div className="text-center py-8">
-                <RefreshCw className="w-8 h-8 mx-auto animate-spin text-muted-foreground mb-2" />
-                <p className="text-muted-foreground">Checking service status...</p>
-              </div>
+              <Card className="border border-border/40 p-12 text-center">
+                <CardContent className="p-0 space-y-4">
+                  <RefreshCw className="w-8 h-8 mx-auto animate-spin text-primary" />
+                  <p className="text-sm text-muted-foreground">Connecting and querying services...</p>
+                </CardContent>
+              </Card>
             ) : (
               data?.services.map((service, index) => (
-                <Card key={index} className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      {service.status ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-500" />
-                      ) : (
-                        <AlertTriangle className="w-5 h-5 text-yellow-500" />
-                      )}
-                      <span className="font-medium text-foreground">{service.name}</span>
+                <Card key={index} className="border border-border/40 hover:border-primary/10 bg-card hover:bg-primary/[0.005] transition-all duration-300 relative overflow-hidden">
+                  <CardContent className="p-6 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center flex-shrink-0">
+                        {service.status ? (
+                          <CheckCircle2 className="w-5 h-5 text-green-500" />
+                        ) : (
+                          <AlertTriangle className="w-5 h-5 text-yellow-500 animate-pulse" />
+                        )}
+                      </div>
+                      <div className="space-y-1">
+                        <span className="font-bold text-foreground block leading-none">{service.name}</span>
+                        <span className="text-xs text-muted-foreground block">
+                          Verified: {new Date(service.timestamp).toLocaleString()}
+                        </span>
+                      </div>
                     </div>
-                    <div className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold ${service.status ? "bg-green-500 hover:bg-green-600 text-white" : "bg-yellow-500 hover:bg-yellow-600 text-white"}`}>
-                      {service.status ? "Operational" : "Issues"}
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-2 ml-8">
-                    Last checked: {new Date(service.timestamp).toLocaleString()}
-                  </p>
+                    <Badge 
+                      variant={service.status ? "default" : "secondary"} 
+                      className={`font-semibold transition-all px-3 py-1 ${service.status ? "bg-green-500/10 text-green-500 border border-green-500/20 hover:bg-green-500/20" : "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 hover:bg-yellow-500/20"}`}
+                    >
+                      {service.status ? "Operational" : "Degraded"}
+                    </Badge>
+                  </CardContent>
                 </Card>
               ))
             )}
           </div>
 
-          <Card className="p-4 mt-6 bg-muted/50">
-            <h3 className="font-semibold text-foreground mb-2">About This Status Page</h3>
-            <p className="text-sm text-muted-foreground">
-              This page monitors the status of core services and dependencies used by {APP_CONFIG.appName}.
-              Checks are performed every 60 seconds automatically. Services are checked via HTTP HEAD requests
-              with a 5-second timeout. If you notice any persistent issues, please contact our support team.
-            </p>
+          {/* About this panel card */}
+          <Card className="border border-border/40 bg-muted/30 dark:bg-muted/10 mt-8 relative overflow-hidden">
+            <CardContent className="p-6 sm:p-8 flex gap-4 items-start">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Info className="w-5 h-5 text-primary" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-bold text-foreground text-base">Monitoring Disclosures</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Status variables are updated every 60 seconds automatically. Systems are checked using asynchronous HTTP HEAD calls. If you represent an institution experiencing integration delays, please consult the support team at <a href="mailto:reach.saad@outlook.com" className="text-primary hover:underline font-semibold">reach.saad@outlook.com</a>.
+                </p>
+              </div>
+            </CardContent>
           </Card>
+
         </div>
 
         <Footer />

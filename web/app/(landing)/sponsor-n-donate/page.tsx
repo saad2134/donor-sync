@@ -10,6 +10,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Heart, HandHeart, Globe, Users, TrendingUp, Award, Sparkles, ArrowRight, CheckCircle, Target, Gift, Droplets, Shield, FileText, Info } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function SponsorDonatePage() {
   const [mounted, setMounted] = useState(false);
@@ -212,103 +214,120 @@ export default function SponsorDonatePage() {
               })}
             </div>
 
-            <div className="mb-20 px-4">
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Make a One-Time Donation</h2>
-              <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-                Choose your impact level. Every donation supports emergency blood access.
-              </p>
+            <Tabs defaultValue="one-time" className="w-full mb-20 px-4">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 p-1 bg-foreground/10 mb-12">
+                <TabsTrigger value="one-time" className="data-[state=active]:bg-background data-[state=active]:shadow-md">
+                  <Heart className="w-4 h-4 mr-2 text-primary" />
+                  One-Time Donation
+                </TabsTrigger>
+                <TabsTrigger value="recurring" className="data-[state=active]:bg-background data-[state=active]:shadow-md">
+                  <HandHeart className="w-4 h-4 mr-2 text-primary" />
+                  Recurring Support
+                </TabsTrigger>
+              </TabsList>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {donationLevels.map((level, idx) => {
-                  const Icon = level.icon;
-                  return (
-                    <Card key={idx} className={`relative overflow-hidden transition-all duration-300 hover:shadow-xl ${level.popular ? 'border-2 border-primary shadow-lg shadow-primary/10 scale-105' : ''}`}>
-                      {level.popular && (
-                        <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-primary/80 text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg">
-                          MOST POPULAR
-                        </div>
-                      )}
-                      <CardHeader className="pb-6">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4">
-                          <Icon className="w-6 h-6 text-primary" />
-                        </div>
-                        <CardTitle className="text-2xl font-bold">{level.name}</CardTitle>
+              <TabsContent value="one-time">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-4">Make a One-Time Donation</h2>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Choose your impact level. Every donation supports emergency blood access.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {donationLevels.map((level, idx) => {
+                    const Icon = level.icon;
+                    return (
+                      <Card key={idx} className={`relative overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full ${level.popular ? 'border-2 border-primary shadow-lg shadow-primary/10 scale-105' : ''}`}>
+                        {level.popular && (
+                          <div className="absolute top-0 right-0 bg-gradient-to-l from-primary to-primary/80 text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg">
+                            MOST POPULAR
+                          </div>
+                        )}
+                        <CardHeader className="pb-6">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4">
+                            <Icon className="w-6 h-6 text-primary" />
+                          </div>
+                          <CardTitle className="text-2xl font-bold">{level.name}</CardTitle>
+                          <div className="mt-4">
+                            <div className="flex items-baseline gap-1">
+                              <span className="text-4xl font-bold">{level.amount}</span>
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-1">{level.period}</p>
+                          </div>
+                          <CardDescription className="text-base mt-3">{level.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="pb-6 flex-grow">
+                          <ul className="space-y-3">
+                            {level.features.map((feature, fidx) => (
+                              <li key={fidx} className="flex items-start gap-2 text-sm">
+                                <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                        <CardFooter className="pt-0 mt-auto">
+                          <Button 
+                            className={`w-full h-12 text-base font-medium ${level.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
+                            variant={level.popular ? 'default' : 'outline'}
+                          >
+                            Donate {level.amount}
+                            <Heart className="w-4 h-4 ml-2" />
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="recurring">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-4">Recurring Support</h2>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Make a bigger impact with monthly or annual contributions.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                  {recurringPlans.map((plan, idx) => (
+                    <Card key={idx} className="hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                      <CardHeader>
+                        <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                        <CardDescription className="text-base">{plan.description}</CardDescription>
                         <div className="mt-4">
                           <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold">{level.amount}</span>
+                            <span className="text-4xl font-bold">{plan.amount}</span>
+                            <span className="text-muted-foreground text-lg">{plan.period}</span>
                           </div>
-                          <p className="text-sm text-muted-foreground mt-1">{level.period}</p>
                         </div>
-                        <CardDescription className="text-base mt-3">{level.description}</CardDescription>
                       </CardHeader>
-                      <CardContent className="pb-6">
-                        <ul className="space-y-3">
-                          {level.features.map((feature, fidx) => (
-                            <li key={fidx} className="flex items-start gap-2 text-sm">
+                      <CardContent className="space-y-6 flex-grow">
+                        <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                          <p className="text-sm text-foreground font-medium">Your Impact:</p>
+                          <p className="text-sm text-muted-foreground mt-1">{plan.impact}</p>
+                        </div>
+                        <ul className="space-y-2">
+                          {plan.benefits.map((benefit, bidx) => (
+                            <li key={bidx} className="flex items-start gap-2 text-sm">
                               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                              <span>{feature}</span>
+                              <span>{benefit}</span>
                             </li>
                           ))}
                         </ul>
                       </CardContent>
-                      <CardFooter className="pt-0">
-                        <Button 
-                          className={`w-full h-12 text-base font-medium ${level.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
-                          variant={level.popular ? 'default' : 'outline'}
-                        >
-                          Donate {level.amount}
-                          <Heart className="w-4 h-4 ml-2" />
+                      <CardFooter className="pt-0 mt-auto">
+                        <Button className="w-full h-12 text-base font-medium">
+                          Start {plan.name}
+                          <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </CardFooter>
                     </Card>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="mb-20  px-4">
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Recurring Support</h2>
-              <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-                Make a bigger impact with monthly or annual contributions.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {recurringPlans.map((plan, idx) => (
-                  <Card key={idx} className="hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader>
-                      <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                      <CardDescription className="text-base">{plan.description}</CardDescription>
-                      <div className="mt-4">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-4xl font-bold">{plan.amount}</span>
-                          <span className="text-muted-foreground text-lg">{plan.period}</span>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
-                        <p className="text-sm text-foreground font-medium">Your Impact:</p>
-                        <p className="text-sm text-muted-foreground mt-1">{plan.impact}</p>
-                      </div>
-                      <ul className="space-y-2">
-                        {plan.benefits.map((benefit, bidx) => (
-                          <li key={bidx} className="flex items-start gap-2 text-sm">
-                            <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                    <CardFooter className="pt-0">
-                      <Button className="w-full h-12 text-base font-medium">
-                        Start {plan.name}
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                ))}
-              </div>
-            </div>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
 
             <div className="mb-20  px-4">
               <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Sponsorship Opportunities</h2>
@@ -320,7 +339,7 @@ export default function SponsorDonatePage() {
                 {sponsorshipOpportunities.map((opp, idx) => {
                   const Icon = opp.icon;
                   return (
-                    <Card key={idx} className="hover:shadow-xl transition-shadow duration-300">
+                    <Card key={idx} className="hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
                       <CardHeader>
                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4">
                           <Icon className="w-6 h-6 text-primary" />
@@ -328,7 +347,7 @@ export default function SponsorDonatePage() {
                         <CardTitle className="text-xl">{opp.title}</CardTitle>
                         <CardDescription className="text-base">{opp.description}</CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-6">
+                      <CardContent className="space-y-6 flex-grow">
                         <div className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
                           <p className="text-sm text-foreground font-semibold">Impact:</p>
                           <p className="text-sm text-muted-foreground mt-1">{opp.impact}</p>
@@ -343,7 +362,7 @@ export default function SponsorDonatePage() {
                           ))}
                         </ul>
                       </CardContent>
-                      <CardFooter className="pt-0">
+                      <CardFooter className="pt-0 mt-auto">
                         <Button variant="outline" className="w-full h-12 text-base font-medium">
                           Learn More
                           <ArrowRight className="w-4 h-4 ml-2" />
@@ -392,9 +411,11 @@ export default function SponsorDonatePage() {
                       <FileText className="w-4 h-4 mr-2" />
                       View Impact Report
                     </Button>
-                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium">
-                      Contact Us
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium" asChild>
+                      <Link href="/contact">
+                        Contact Us
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
                     </Button>
                   </div>
                 </div>

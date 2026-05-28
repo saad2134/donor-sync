@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Check, X, ArrowRight, Zap, Shield, BarChart3, Users, Database, Clock, Info } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
 
 export default function PricingPage() {
   const [mounted, setMounted] = useState(false);
@@ -173,9 +174,12 @@ export default function PricingPage() {
                       <Button
                         className={`w-full h-12 text-base font-medium ${tier.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
                         variant={tier.popular ? 'default' : 'outline'}
+                        asChild
                       >
-                        {tier.cta}
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        <Link href={tier.cta === "Contact Sales" ? "/contact" : "/login?role=hospital"}>
+                          {tier.cta}
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Link>
                       </Button>
                     </CardFooter>
                   </Card>
@@ -213,12 +217,16 @@ export default function PricingPage() {
                     </p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button size="lg" className="h-12 px-8 text-base font-medium">
-                      Start Free Trial
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                    <Button size="lg" className="h-12 px-8 text-base font-medium" asChild>
+                      <Link href="/login?role=hospital">
+                        Start Free Trial
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
                     </Button>
-                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium">
-                      Schedule Demo
+                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium" asChild>
+                      <Link href="/contact">
+                        Schedule Demo
+                      </Link>
                     </Button>
                   </div>
                 </div>

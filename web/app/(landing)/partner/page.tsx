@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Globe, Heart, Handshake, TrendingUp, ShieldCheck, MapPin, CheckCircle, ArrowRight, FileText, Users, Target, Sparkles, Info } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
 
 export default function PartnerPage() {
   const [mounted, setMounted] = useState(false);
@@ -304,9 +305,11 @@ export default function PartnerPage() {
                       <FileText className="w-4 h-4 mr-2" />
                       Download Partnership Deck
                     </Button>
-                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium">
-                      Schedule Consultation
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                    <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium" asChild>
+                      <Link href="/contact">
+                        Schedule Consultation
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
                     </Button>
                   </div>
                 </div>
