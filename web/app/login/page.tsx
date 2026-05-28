@@ -492,7 +492,26 @@ function LoginContent() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Theme Toggler at top right */}
-      <div className="absolute top-0 right-0 p-4 z-50">
+      <div className="absolute top-0 right-0 p-4 z-50 flex gap-2">
+        {/*GitHub Repo Button*/}
+        <Button variant="outline" size="icon" asChild>
+          <a
+            href="https://github.com/saad2134/donor-sync"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-[1.2rem] w-[1.2rem] transition-all hover:scale-110"
+            >
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.582 0-.287-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.495.998.108-.775.42-1.305.763-1.605-2.665-.303-5.467-1.335-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.654 1.653.243 2.873.12 3.176.77.84 1.232 1.91 1.232 3.22 0 4.61-2.807 5.624-5.48 5.92.431.372.815 1.102.815 2.222 0 1.606-.015 2.898-.015 3.293 0 .323.216.7.825.58C20.565 21.795 24 17.303 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+        </Button>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon" className="hover:bg-muted/50 border-border/60 transition-all">
