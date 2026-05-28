@@ -246,7 +246,7 @@ export default function AboutPage() {
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-primary" />
-                    <strong>Email:</strong> reach.saad@outlook.com
+                    <strong>Email:</strong> <a href="mailto:reach.saad@outlook.com" className="text-primary hover:underline">reach.saad@outlook.com</a>
                   </span>
                 </div>
               </div>

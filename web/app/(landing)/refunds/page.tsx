@@ -69,7 +69,7 @@ export default function RefundPolicyPage() {
 
             <p>For refund inquiries, reach out to us:</p>
 
-            <p><strong>Email:</strong> reach.saad@outlook.com</p>
+            <p><strong>Email:</strong> <a href="mailto:reach.saad@outlook.com" className="text-primary hover:underline">reach.saad@outlook.com</a></p>
           </article>
         </div>
 

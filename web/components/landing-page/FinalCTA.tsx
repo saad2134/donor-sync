@@ -37,7 +37,7 @@ export default function FinalCTA() {
   };
 
   return (
-    <div className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden py-24 pb-48 overflow-x-hidden ">
+    <div className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden py-16 pb-20 overflow-x-hidden ">
       <AceAuroraBackground>
         <div className="absolute inset-0 ">
           <motion.div

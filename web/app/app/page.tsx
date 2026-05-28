@@ -4,19 +4,22 @@ import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext"; // Import user context
 import { useRouter } from "next/navigation";
 
-// Import role-based dashboards
-import PatDash from "@/components/portals/patientDash";
-import DonDash from "@/components/portals/donorDash";
-import HosDash from "@/components/portals/hospitalDash";
-import OrgDash from "@/components/portals/organisationDash";
-
-// Import role-based onboarding forms
-import PatOnb from "@/components/onb-forms/patientOnb";
-import DonOnb from "@/components/onb-forms/donorOnb";
-import HosOnb from "@/components/onb-forms/hospitalOnb";
-import OrgOnb from "@/components/onb-forms/organisationOnb";
-
+import dynamic from "next/dynamic";
 import HeartLoading from "@/components/custom/HeartLoading"; // Heart loading animation
+
+// Dynamically import role-based onboarding forms to optimize bundle size
+const PatOnb = dynamic(() => import("@/components/onb-forms/patientOnb"), {
+  loading: () => <div className="flex h-screen items-center justify-center"><HeartLoading /></div>
+});
+const DonOnb = dynamic(() => import("@/components/onb-forms/donorOnb"), {
+  loading: () => <div className="flex h-screen items-center justify-center"><HeartLoading /></div>
+});
+const HosOnb = dynamic(() => import("@/components/onb-forms/hospitalOnb"), {
+  loading: () => <div className="flex h-screen items-center justify-center"><HeartLoading /></div>
+});
+const OrgOnb = dynamic(() => import("@/components/onb-forms/organisationOnb"), {
+  loading: () => <div className="flex h-screen items-center justify-center"><HeartLoading /></div>
+});
 
 const AppPage = () => {
     const { userId, role, onboarded, device, setUser } = useUser(); // Get user data from context
