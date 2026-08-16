@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  <a href="https://github.com/saad2134/dosezy">
+  <a href="https://github.com/saad2134/donor-sync">
     <img width="1440" height="310" alt="🩸 Donor Sync – Blood Bank Management System" src="https://github.com/user-attachments/assets/02940e8c-fea8-4ff1-923b-4c1b90fc6ec5" />
  </a>
 </h1>
