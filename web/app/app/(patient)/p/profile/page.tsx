@@ -35,7 +35,7 @@ import { Snowflake, Pencil, Link, Globe, Lock, Loader2, Check, Car, Heart, Calen
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 
 
-import DonPF from "@/components/profile-forms/donorPF";
+import PatPF from "@/components/profile-forms/patientPF";
 
 import { differenceInYears } from "date-fns"
 
@@ -130,7 +130,7 @@ export default function ProfilePage() {
     try {
       const newVisibility = isPublic ? "no" : "yes";
 
-      const response = await updateUserData("donors", userId, {
+      const response = await updateUserData("patients", userId, {
         isPublicProfile: newVisibility,
       });
 
@@ -252,7 +252,7 @@ export default function ProfilePage() {
             </div>
           </DialogHeader>
 
-          <DonPF />
+          <PatPF />
 
           <DialogFooter>
             {/* Empty footer */}

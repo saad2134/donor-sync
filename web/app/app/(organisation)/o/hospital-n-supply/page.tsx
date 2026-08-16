@@ -1,224 +1,335 @@
-//@ts-nocheck
+// --@ts-nocheck
+"use client";
+
 import { ContentLayout } from "@/components/admin-panel/content-layout";
+import { useState, useEffect } from "react";
+import { collection, query, where, getDocs, setDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
+import { useUser } from "@/context/UserContext";
+import { getUserDataById } from "@/firebaseFunctions";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { Truck, Building, FileText, CheckCircle2, ShieldAlert } from "lucide-react";
+
+const BLOOD_GROUPS = ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"];
+const PARTNERS = ["MedExpress Logistics", "LifeLine Transport", "CriticalCare Couriers"];
 
 export default function HospitalSupplyManagement() {
+  const { toast } = useToast();
+  const { userId } = useUser();
+
+  const [profile, setProfile] = useState<any>(null);
+  const [hospitals, setHospitals] = useState<any[]>([]);
+  const [deliveries, setDeliveries] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // Delivery Form State
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [targetHospitalId, setTargetHospitalId] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("O-");
+  const [quantity, setQuantity] = useState("5");
+  const [partnerName, setPartnerName] = useState(PARTNERS[0]);
+  const [priority, setPriority] = useState("standard");
+
+  useEffect(() => {
+    if (!userId || !db) return;
+
+    const fetchSupplyData = async () => {
+      setLoading(true);
+      try {
+        // Fetch NGO Profile
+        const pData = await getUserDataById(userId, "organisation");
+        setProfile(pData);
+
+        // Fetch Hospitals list
+        const hospRef = collection(db, "hospitals");
+        const hospSnap = await getDocs(hospRef);
+        const hospList = hospSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setHospitals(hospList);
+
+        // Fetch Deliveries
+        const deliveriesRef = collection(db, "blood-deliveries");
+        const q = query(deliveriesRef, where("ngoId", "==", userId));
+        const qSnap = await getDocs(q);
+        const fetchedDeliveries = qSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // Sort descending
+        fetchedDeliveries.sort((a: any, b: any) => {
+          const dateA = a.createdAt ? new Date(a.createdAt.seconds * 1000).getTime() : 0;
+          const dateB = b.createdAt ? new Date(b.createdAt.seconds * 1000).getTime() : 0;
+          return dateB - dateA;
+        });
+
+        setDeliveries(fetchedDeliveries);
+      } catch (err) {
+        console.error("Failed to load supply records:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSupplyData();
+  }, [userId]);
+
+  const handleScheduleDelivery = async () => {
+    if (!db || !userId) return;
+
+    if (!targetHospitalId || !bloodGroup || !quantity || !partnerName) {
+      toast({
+        title: "Required Fields Missing",
+        description: "Please fill out all fields to dispatch delivery.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const deliveryId = `dlv-${Date.now()}`;
+      const selectedHosp = hospitals.find(h => h.id === targetHospitalId);
+
+      const newDelivery = {
+        ngoId: userId,
+        ngoName: profile?.o_name || "NGO Partner",
+        hospitalId: targetHospitalId,
+        hospitalName: selectedHosp?.h_name || "Partner Hospital",
+        hospitalCity: selectedHosp?.h_city || "",
+        bloodGroup,
+        quantity: Number(quantity),
+        partner: partnerName,
+        priority,
+        status: "in-transit",
+        createdAt: new Date(),
+      };
+
+      await setDoc(doc(db, "blood-deliveries", deliveryId), newDelivery);
+
+      setDeliveries(prev => [
+        { id: deliveryId, ...newDelivery },
+        ...prev
+      ]);
+
+      toast({
+        title: "🚚 Delivery Dispatched",
+        description: `Dispatched ${quantity} units of ${bloodGroup} to ${selectedHosp?.h_name}.`,
+      });
+
+      setDialogOpen(false);
+      setQuantity("5");
+      setTargetHospitalId("");
+    } catch (err) {
+      console.error("Failed to schedule delivery:", err);
+      toast({
+        title: "❌ Dispatch Failed",
+        description: "Failed to dispatch delivery. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMarkDelivered = async (deliveryId: string) => {
+    if (!db) return;
+
+    try {
+      setLoading(true);
+      const dRef = doc(db, "blood-deliveries", deliveryId);
+      await updateDoc(dRef, { status: "delivered" });
+
+      setDeliveries(prev =>
+        prev.map(d => (d.id === deliveryId ? { ...d, status: "delivered" } : d))
+      );
+
+      toast({
+        title: "✅ Mark Delivered",
+        description: "Delivery status successfully updated to Delivered.",
+      });
+    } catch (err) {
+      console.error("Failed to update delivery status:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getPriorityBadgeColor = (prio: string) => {
+    return prio === "emergency" ? "bg-red-600 hover:bg-red-700" : "bg-blue-500 hover:bg-blue-600";
+  };
+
+  const getStatusBadgeColor = (stat: string) => {
+    return stat === "delivered" ? "bg-green-500 hover:bg-green-600" : "bg-orange-500 hover:bg-orange-600 animate-pulse";
+  };
+
+  const formatDate = (timestamp: any) => {
+    if (!timestamp) return "N/A";
+    const date = new Date(timestamp.seconds * 1000);
+    return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  };
+
   return (
-    <ContentLayout title="Hospital & Supply Management">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
-        {/* Request Management Card */}
-        <div className="bg-white dark:bg-stone-900 rounded-lg shadow-md overflow-hidden border border-stone-200 dark:border-stone-800">
-          <div className="bg-red-600 dark:bg-red-700 text-white p-4 font-bold flex items-center justify-between">
-            <span className="flex items-center">
-              <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V7h14v12zm-2-7H7v-2h10v2zm-4 4H7v-2h6v2z" />
-              </svg>
-              Request Management
-            </span>
-            <span className="bg-red-800 text-white px-2 py-1 rounded-full text-xs">5 New</span>
+    <ContentLayout title="Hospital &amp; Supply Management">
+      <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6 gap-4 px-2">
+        <div>
+          <div className="flex items-center gap-2">
+            <Truck className="h-6 w-6 text-red-500 shrink-0" />
+            <h2 className="text-2xl font-semibold">Hospital Supply &amp; Logistics</h2>
           </div>
-          <div className="p-5">
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">City General Hospital</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Request ID: #BRQ-2023-0458</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">A+ (5 units), O- (3 units)</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Requested: April 5, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">
-                Status: <span className="bg-red-600 text-white px-2 py-1 rounded-full text-xs animate-pulse">URGENT</span>
-              </p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">Memorial Medical Center</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Request ID: #BRQ-2023-0457</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">B- (2 units), AB+ (1 unit)</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Requested: April 4, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">
-                Status: <span className="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">PENDING</span>
-              </p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">Children's Hospital</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Request ID: #BRQ-2023-0456</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">O+ (4 units)</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Requested: April 4, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">
-                Status: <span className="bg-green-600 text-white px-2 py-1 rounded-full text-xs">APPROVED</span>
-              </p>
-            </div>
-            
-            <div className="text-center mt-4">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                View All Requests
-              </button>
-            </div>
-          </div>
+          <p className="text-foreground text-md mt-2">
+            Dispatch and track blood bag deliveries and supply levels to partner hospitals.
+          </p>
         </div>
-        
-        {/* Current Supply Status Card */}
-        <div className="bg-white dark:bg-stone-900 rounded-lg shadow-md overflow-hidden border border-stone-200 dark:border-stone-800">
-          <div className="bg-red-600 dark:bg-red-700 text-white p-4 font-bold flex items-center justify-between">
-            <span className="flex items-center">
-              <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L6 7l1.41 1.41L12 4.83l4.59 3.58L18 7 12 2zm0 15-6-5 1.41-1.41L12 14.17l4.59-3.58L18 12l-6 5z" />
-              </svg>
-              Current Supply Status
-            </span>
-          </div>
-          <div className="p-5">
-            <div className="grid grid-cols-4 gap-2 mb-4">
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">A+</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">45 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">A-</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">12 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">B+</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">32 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">B-</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">8 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">AB+</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">18 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">AB-</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">5 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">O+</div>
-                <div className="text-stone-600 dark:text-stone-400 text-sm">53 units</div>
-              </div>
-              <div className="p-3 bg-stone-50 dark:bg-stone-800 rounded text-center border border-stone-200 dark:border-stone-700">
-                <div className="text-red-600 dark:text-red-500 text-lg font-bold">O-</div>
-                <div className="text-red-600 dark:text-red-500 text-sm">3 units</div>
-              </div>
-            </div>
-            
-            <div className="flex justify-between items-center p-4 mb-3 bg-stone-50 dark:bg-stone-800 rounded border-l-3 border-red-600 dark:border-red-500">
-              <span className="font-semibold text-stone-800 dark:text-stone-200">Critical Types:</span>
-              <span className="text-red-600 dark:text-red-500 font-bold">O-, AB-</span>
-            </div>
-            
-            <div className="flex justify-between items-center p-4 mb-3 bg-stone-50 dark:bg-stone-800 rounded border-l-3 border-red-600 dark:border-red-500">
-              <span className="font-semibold text-stone-800 dark:text-stone-200">Expiring within 7 days:</span>
-              <span className="text-yellow-500 dark:text-yellow-400 font-bold">12 units</span>
-            </div>
-            
-            <div className="flex justify-between items-center p-4 mb-3 bg-stone-50 dark:bg-stone-800 rounded border-l-3 border-red-600 dark:border-red-500">
-              <span className="font-semibold text-stone-800 dark:text-stone-200">Total Inventory:</span>
-              <span className="text-stone-800 dark:text-stone-200 font-bold">176 units</span>
-            </div>
-            
-            <div className="text-center mt-4">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                Full Inventory Report
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Partner Hospitals Card */}
-        <div className="bg-white dark:bg-stone-900 rounded-lg shadow-md overflow-hidden border border-stone-200 dark:border-stone-800">
-          <div className="bg-red-600 dark:bg-red-700 text-white p-4 font-bold flex items-center justify-between">
-            <span className="flex items-center">
-              <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11 6.5a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm4.5-1.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6.5 6v2h-2v7h-3v-7h-6v7H8v-7H6v-2c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2z" />
-              </svg>
-              Partner Hospitals
-            </span>
-          </div>
-          <div className="p-5">
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">City General Hospital</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Priority Level: <span className="text-green-600 dark:text-green-500">Platinum</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Last Supply: April 2, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: Dr. Sarah Johnson</p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">Memorial Medical Center</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Priority Level: <span className="text-green-600 dark:text-green-500">Gold</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Last Supply: March 28, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: Dr. Michael Chen</p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">Children's Hospital</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Priority Level: <span className="text-green-600 dark:text-green-500">Platinum</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Last Supply: April 1, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: Dr. Emily Rodriguez</p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">University Medical Center</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Priority Level: <span className="text-green-600 dark:text-green-500">Silver</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Last Supply: March 25, 2025</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: Dr. James Wilson</p>
-            </div>
-            
-            <div className="text-center mt-4">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                Manage Hospital Partners
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Blood Delivery Partners Card */}
-        <div className="bg-white dark:bg-stone-900 rounded-lg shadow-md overflow-hidden border border-stone-200 dark:border-stone-800">
-          <div className="bg-red-600 dark:bg-red-700 text-white p-4 font-bold flex items-center justify-between">
-            <span className="flex items-center">
-              <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5M7.5 17c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5M20 8h-3V4H1v11h3c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h3v-5l-3-3zm-.5 1.5l1.96 2.5H17V9.5h2.5z" />
-              </svg>
-              Blood Delivery Partners
-            </span>
-          </div>
-          <div className="p-5">
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">MedExpress Logistics</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Service Level: <span className="text-green-600 dark:text-green-500">Emergency (24/7)</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Current Deliveries: 2 Active</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: 1-800-MED-EXPR</p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">LifeLine Transport</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Service Level: <span className="text-green-600 dark:text-green-500">Standard (8am-8pm)</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Current Deliveries: 1 Active</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: 1-888-LIFE-TR</p>
-            </div>
-            
-            <div className="border-l-4 border-red-600 dark:border-red-500 p-3 mb-3 bg-stone-50 dark:bg-stone-800 rounded-r">
-              <h4 className="text-stone-800 dark:text-white font-medium mb-1">CriticalCare Couriers</h4>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Service Level: <span className="text-green-600 dark:text-green-500">Rush (1-3 hours)</span></p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Current Deliveries: None</p>
-              <p className="text-stone-600 dark:text-stone-300 text-sm">Contact: 1-855-CRIT-CR</p>
-            </div>
-            
-            <div className="flex justify-between items-center p-4 mb-3 bg-stone-50 dark:bg-stone-800 rounded border-l-3 border-red-600 dark:border-red-500">
-              <span className="font-semibold text-stone-800 dark:text-stone-200">Deliveries Today:</span>
-              <span className="text-stone-800 dark:text-stone-200 font-bold">7 Completed, 3 Active</span>
-            </div>
-            
-            <div className="text-center mt-4 flex flex-wrap justify-center gap-2">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                Schedule Delivery
-              </button>
-              <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                Track Deliveries
-              </button>
-            </div>
-          </div>
-        </div>
+        <Button className="bg-accent text-white gap-2 shrink-0" onClick={() => setDialogOpen(true)}>
+          <Truck className="h-4 w-4" /> Schedule New Delivery
+        </Button>
       </div>
+
+      <div className="space-y-4 px-2">
+        <h3 className="font-bold text-lg border-b border-border/40 pb-2 flex items-center gap-2">
+          <FileText className="h-5 w-5 text-accent" /> Logistics Logs ({deliveries.length})
+        </h3>
+
+        {loading && deliveries.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">Loading supply logs...</div>
+        ) : deliveries.length === 0 ? (
+          <Card className="p-8 text-center border-2 border-dashed">
+            <p className="text-gray-500 text-lg">No blood deliveries logged yet.</p>
+            <p className="text-gray-400 text-sm mt-1">Plan a blood delivery run using the "Schedule New Delivery" tool.</p>
+          </Card>
+        ) : (
+          deliveries.map((dlv) => (
+            <Card key={dlv.id} className="relative overflow-hidden hover:shadow-md transition rounded-2xl">
+              <div className={`absolute top-0 bottom-0 left-0 w-1.5 ${dlv.status === "delivered" ? "bg-green-500" : "bg-orange-500 animate-pulse"}`} />
+
+              <CardContent className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="font-bold text-lg">Delivery #{dlv.id.split("-").pop()}</h3>
+                    <Badge className={getPriorityBadgeColor(dlv.priority)}>{dlv.priority}</Badge>
+                    <Badge className={getStatusBadgeColor(dlv.status)}>{dlv.status}</Badge>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-sm text-muted-foreground">
+                    <p className="flex items-center gap-1.5 text-foreground font-semibold">
+                      <Building className="h-4 w-4 text-red-500" />
+                      <span>{dlv.hospitalName} ({dlv.hospitalCity})</span>
+                    </p>
+                    <p>🩸 Blood Group: <strong className="text-foreground">{dlv.bloodGroup}</strong></p>
+                    <p>📦 Quantity: <strong className="text-foreground">{dlv.quantity} units</strong></p>
+                    <p>🚚 Courier: <strong className="text-foreground">{dlv.partner}</strong></p>
+                    <p className="col-span-2">📅 Dispatched: <strong className="text-foreground">{formatDate(dlv.createdAt)}</strong></p>
+                  </div>
+                </div>
+
+                {dlv.status === "in-transit" ? (
+                  <Button
+                    onClick={() => handleMarkDelivered(dlv.id)}
+                    className="bg-green-600 hover:bg-green-700 text-white gap-1.5 w-full sm:w-auto shrink-0"
+                  >
+                    <CheckCircle2 className="h-4 w-4" /> Mark Delivered
+                  </Button>
+                ) : (
+                  <div className="flex items-center gap-1 text-green-500 font-semibold text-sm bg-green-500/10 p-2.5 rounded-xl border border-green-500/20 shrink-0">
+                    <CheckCircle2 className="h-4 w-4" /> Delivered successfully
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ))
+        )}
+      </div>
+
+      {/* Schedule Delivery Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-md text-left">
+          <DialogHeader>
+            <div className="flex items-center justify-between w-full">
+              <DialogTitle>Schedule Blood Supply Delivery</DialogTitle>
+              <Button onClick={() => setDialogOpen(false)} variant="outline" size="sm">
+                Cancel
+              </Button>
+            </div>
+          </DialogHeader>
+
+          <div className="space-y-4 py-4">
+            <div>
+              <Label>Target Hospital *</Label>
+              <Select value={targetHospitalId} onValueChange={setTargetHospitalId}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Target Hospital" />
+                </SelectTrigger>
+                <SelectContent>
+                  {hospitals.map((h) => (
+                    <SelectItem key={h.id} value={h.id}>{h.h_name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>Blood Group *</Label>
+              <Select value={bloodGroup} onValueChange={setBloodGroup}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Blood Group" />
+                </SelectTrigger>
+                <SelectContent>
+                  {BLOOD_GROUPS.map((group) => (
+                    <SelectItem key={group} value={group}>{group}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>Quantity (units) *</Label>
+              <Input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Label>Logistics Delivery Partner *</Label>
+              <Select value={partnerName} onValueChange={setPartnerName}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Delivery Partner" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PARTNERS.map((p) => (
+                    <SelectItem key={p} value={p}>{p}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>Priority Level *</Label>
+              <Select value={priority} onValueChange={setPriority}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="standard">Standard</SelectItem>
+                  <SelectItem value="emergency">Emergency (Rush Dispatch)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button onClick={handleScheduleDelivery} disabled={loading} className="w-full bg-accent text-white font-bold gap-2">
+              <Truck className="h-4 w-4 shrink-0 animate-bounce" /> Dispatch Supply Delivery
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </ContentLayout>
   );
 }

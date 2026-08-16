@@ -1,38 +1,26 @@
-// @ts-nocheck
-
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import CryptoJS from "crypto-js";
 
-const COOKIE_ENCRYPT_KEY = process.env.NEXT_PUBLIC_COOKIE_ENCRYPT_KEY;
-
-// Function to Encrypt Data
+// Function to Encrypt Data (no-op)
 export function encryptData(data: string) {
-  return CryptoJS.AES.encrypt(data, COOKIE_ENCRYPT_KEY).toString();
+  return data;
 }
 
-// Function to Decrypt Data
+// Function to Decrypt Data (no-op)
 export function decryptData(ciphertext: string) {
-  try {
-    const bytes = CryptoJS.AES.decrypt(ciphertext, COOKIE_ENCRYPT_KEY);
-    return bytes.toString(CryptoJS.enc.Utf8);
-  } catch (error) {
-    return null;
-  }
+  return ciphertext;
 }
 
-// Function to Store Encrypted Cookie
+// Function to Store Cookie
 export function setEncryptedCookie(name: string, value: string, days: number) {
-  const encryptedValue = encryptData(value);
-  Cookies.set(name, encryptedValue, { expires: days });
+  Cookies.set(name, value, { expires: days });
 }
 
-// Function to Retrieve and Decrypt Cookie
+// Function to Retrieve Cookie
 export function getDecryptedCookie(name: string) {
-  const encryptedValue = Cookies.get(name);
-  return encryptedValue ? decryptData(encryptedValue) : null;
+  return Cookies.get(name) || null;
 }
 
 

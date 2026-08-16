@@ -27,6 +27,7 @@ import {
 import { useToast } from "@/hooks/use-toast"
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { getUserDataById } from "@/firebaseFunctions";
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -66,6 +67,35 @@ export default function BloodInventoryPage() {
   const [loading, setLoading] = useState(false);
 
   const maxExpiryDate = addDays(new Date(), 30); // 1 month ahead
+
+  const [appointmentsDialogOpen, setAppointmentsDialogOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+  const [appointmentsList, setAppointmentsList] = useState<any[]>([]);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(false);
+
+  const handleSeeAppointments = async (req: any) => {
+    setSelectedRequest(req);
+    setAppointmentsDialogOpen(true);
+    setAppointmentsLoading(true);
+    try {
+      const booked = req.bookedDonors || [];
+      const list = [];
+      for (const booking of booked) {
+        const donorData = (await getUserDataById(booking.userId, "donor")) as any;
+        list.push({
+          ...booking,
+          donorName: donorData?.d_name || "Unknown Donor",
+          donorPhone: donorData?.phone || "N/A",
+          donorBloodGroup: donorData?.d_bloodgroup || "N/A"
+        });
+      }
+      setAppointmentsList(list);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setAppointmentsLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!userId || !db) return;
@@ -257,7 +287,7 @@ export default function BloodInventoryPage() {
                             </Badge>
 
                             <Badge className="text-xs bg-blue-500">
-                              {req.noOfAppointments || 0} Appointments
+                              {req.bookedDonors?.length || 0} Appointments
                             </Badge>
 
                             {req.isUrgent === "yes" && (
@@ -326,7 +356,7 @@ export default function BloodInventoryPage() {
                               {loading ? "Closing..." : "Close Request"}
                             </Button>
                             <Button
-                              onClick={() => { }}
+                              onClick={() => handleSeeAppointments(req)}
                               className="w-full  bg-blue-500 hover:bg-blue-600"
                             >
                               See Appointments
@@ -359,7 +389,7 @@ export default function BloodInventoryPage() {
                             </Badge>
 
                             <Badge className="text-xs bg-blue-500">
-                              {req.noOfAppointments || 0} Appointments
+                              {req.bookedDonors?.length || 0} Appointments
                             </Badge>
 
                             {req.isUrgent === "yes" && (
@@ -422,7 +452,7 @@ export default function BloodInventoryPage() {
                           {req.status === "closed" && (
                             <div className="flex flex-col sm:flex-row sm:gap-4 mt-4 pt-2 gap-2 w-full">
                               <Button
-                                onClick={() => { }}
+                                onClick={() => handleSeeAppointments(req)}
                                 className="w-full  bg-blue-500 hover:bg-blue-600"
                               >
                                 See Appointments
@@ -583,6 +613,37 @@ export default function BloodInventoryPage() {
           <DialogFooter className="pt-6">
             <Button onClick={handleCreateRequest}>Create Request</Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={appointmentsDialogOpen} onOpenChange={setAppointmentsDialogOpen}>
+        <DialogContent className="max-w-xl">
+          <DialogHeader>
+            <div className="flex items-center justify-between w-full">
+              <DialogTitle>Appointments for Request #{selectedRequest?.id.split("-").pop()?.replace("h", "")}</DialogTitle>
+              <Button onClick={() => setAppointmentsDialogOpen(false)} variant="outline">
+                Close
+              </Button>
+            </div>
+          </DialogHeader>
+
+          {appointmentsLoading ? (
+            <div className="text-center py-6">Loading appointments...</div>
+          ) : appointmentsList.length === 0 ? (
+            <div className="text-center py-6 text-muted-foreground">No appointments booked yet.</div>
+          ) : (
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+              {appointmentsList.map((appt, i) => (
+                <div key={i} className="p-4 border rounded-lg bg-card text-card-foreground shadow-sm space-y-1">
+                  <p className="font-semibold text-lg">{appt.donorName}</p>
+                  <p className="text-sm">📞 Phone: <span className="font-mono">{appt.donorPhone}</span></p>
+                  <p className="text-sm">🩸 Blood Group: <span className="font-bold text-red-500">{appt.donorBloodGroup}</span></p>
+                  <p className="text-sm">📅 Date: <span className="font-medium">{appt.date}</span></p>
+                  <p className="text-sm">⏰ Time: <span className="font-medium">{appt.time}</span></p>
+                </div>
+              ))}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
 

@@ -11,26 +11,26 @@ import { db } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { updateUserData } from "@/firebaseFunctions";
 
-// Fetch a single hospital by userId
-export async function getHospitalById(userId: string) {
+// Fetch a single organisation by userId
+export async function getOrganisationById(userId: string) {
     if (!db) {
         console.error("Firebase Firestore not initialized");
         return null;
     }
 
     try {
-        const docRef = doc(db, "hospitals", userId);
+        const docRef = doc(db, "organisations", userId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log("Hospital Data:", docSnap.data());
+            console.log("Organisation Data:", docSnap.data());
             return { id: docSnap.id, ...docSnap.data() };
         } else {
-            console.log("No such hospital found!");
+            console.log("No such organisation found!");
             return null;
         }
     } catch (error) {
-        console.error("Error fetching hospital:", error);
+        console.error("Error fetching organisation:", error);
         return null;
     }
 }
@@ -45,7 +45,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LocationSelector from "@/components/ui/location-input";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UploadClient } from "@uploadcare/upload-client";
@@ -53,25 +52,22 @@ const client = new UploadClient({ publicKey: process.env.NEXT_PUBLIC_UPLOADCARE_
 
 const formSchema = z.object({
     email: z.string(),
-    h_name: z.string().min(1),
-    h_logo_url: z.string().optional(),
-    monthly_patient_count: z.string().min(1),
-    h_type: z.string(),
-    h_website: z.string().min(1).optional(),
-    h_region: z.tuple([z.string(), z.string().optional()]).optional(),
-    h_city: z.string().min(1),
-    h_pincode: z.string(),
-    h_lat: z.string(),
-    h_lon: z.string(),
-    h_phone: z.string(),
-    h_admin_name: z.string().min(1),
-    h_admin_phone: z.string(),
-    h_bloodbank_available: z.string(),
+    o_name: z.string().min(1),
+    o_logo_url: z.string().optional(),
+    o_regNum: z.string().min(1),
+    o_type: z.string(),
+    o_website: z.string().min(1).optional(),
+    o_region: z.tuple([z.string(), z.string().optional()]).optional(),
+    o_city: z.string().min(1),
+    o_pincode: z.string(),
+    o_phone: z.string(),
+    o_admin_name: z.string().min(1),
+    o_admin_phone: z.string(),
 });
 
-export default function HospitalProfileForm() {
+export default function OrganisationProfileForm() {
     const { userId } = useUser();
-    const [hospital, setHospital] = useState<any>(null);
+    const [organisation, setOrganisation] = useState<any>(null);
     const [pIsLoading, setPIsLoading] = useState(true);
 
     const [countryName, setCountryName] = useState<string>("");
@@ -81,50 +77,44 @@ export default function HospitalProfileForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
-            h_name: "",
-            h_logo_url: "",
-            monthly_patient_count: "",
-            h_type: "private",
-            h_website: "",
-            h_region: ["", ""],
-            h_city: "",
-            h_pincode: "",
-            h_lat: "",
-            h_lon: "",
-            h_phone: "",
-            h_admin_name: "",
-            h_admin_phone: "",
-            h_bloodbank_available: "no",
+            o_name: "",
+            o_logo_url: "",
+            o_regNum: "",
+            o_type: "trust",
+            o_website: "",
+            o_region: ["", ""],
+            o_city: "",
+            o_pincode: "",
+            o_phone: "",
+            o_admin_name: "",
+            o_admin_phone: "",
         },
     });
 
     useEffect(() => {
         if (userId) {
-            async function fetchHospitalData() {
-                const data = (await getHospitalById(userId)) as any;
-                setHospital(data);
+            async function fetchOrganisationData() {
+                const data = (await getOrganisationById(userId)) as any;
+                setOrganisation(data);
                 if (data) {
                     form.reset({
                         email: data.email || "",
-                        h_name: data.h_name || "",
-                        h_logo_url: data.h_logo_url || "",
-                        monthly_patient_count: data.monthly_patient_count || "",
-                        h_type: data.h_type || "private",
-                        h_website: data.h_website || "",
-                        h_region: data.h_region || ["", ""],
-                        h_city: data.h_city || "",
-                        h_pincode: data.h_pincode || "",
-                        h_lat: data.h_lat ? String(data.h_lat) : "",
-                        h_lon: data.h_lon ? String(data.h_lon) : "",
-                        h_phone: data.h_phone || "",
-                        h_admin_name: data.h_admin_name || "",
-                        h_admin_phone: data.h_admin_phone || "",
-                        h_bloodbank_available: data.h_bloodbank_available || "no",
+                        o_name: data.o_name || "",
+                        o_logo_url: data.o_logo_url || "",
+                        o_regNum: data.o_regNum || "",
+                        o_type: data.o_type || "trust",
+                        o_website: data.o_website || "",
+                        o_region: data.o_region || ["", ""],
+                        o_city: data.o_city || "",
+                        o_pincode: data.o_pincode || "",
+                        o_phone: data.o_phone || "",
+                        o_admin_name: data.o_admin_name || "",
+                        o_admin_phone: data.o_admin_phone || "",
                     });
                 }
                 setPIsLoading(false);
             }
-            fetchHospitalData();
+            fetchOrganisationData();
         }
     }, [userId, form]);
 
@@ -143,13 +133,13 @@ export default function HospitalProfileForm() {
                 ),
             };
 
-            const response = await updateUserData("hospitals", userId, sanitizedData);
+            const response = await updateUserData("organisations", userId, sanitizedData);
 
             if (response.success) {
-                console.log("Hospital profile updated successfully:", response.message);
+                console.log("Organisation profile updated successfully:", response.message);
                 window.location.reload();
             } else {
-                console.error("Error updating hospital profile:", response.message);
+                console.error("Error updating organisation profile:", response.message);
                 alert("Failed to update. Please try again.");
             }
         } catch (error) {
@@ -175,7 +165,7 @@ export default function HospitalProfileForm() {
         <div className="px-10 py-5">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-3xl mx-auto">
-                    <h1 className="font-bold border-b-2 border-fg-500 pb-2">Hospital Details</h1>
+                    <h1 className="font-bold border-b-2 border-fg-500 pb-2">Organisation Details</h1>
 
                     <FormField
                         control={form.control}
@@ -194,12 +184,12 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_name"
+                        name="o_name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Hospital Name *</FormLabel>
+                                <FormLabel>Organisation Name *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="ABC Hospital Pvt. Ltd." type="text" {...field} />
+                                    <Input placeholder="Hope Blood Foundation" type="text" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -209,7 +199,7 @@ export default function HospitalProfileForm() {
                     {/* Logo Upload */}
                     <FormField
                         control={form.control}
-                        name="h_logo_url"
+                        name="o_logo_url"
                         render={({ field }) => {
                             const [preview, setPreview] = useState<string | null>(field.value ?? null);
 
@@ -254,7 +244,7 @@ export default function HospitalProfileForm() {
 
                             return (
                                 <FormItem>
-                                    <FormLabel>Hospital Logo</FormLabel>
+                                    <FormLabel>Organisation Logo</FormLabel>
                                     <FormControl>
                                         <div className="relative flex items-center gap-4">
                                             <div className="flex-1">
@@ -273,12 +263,12 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="monthly_patient_count"
+                        name="o_regNum"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Monthly Patients Count *</FormLabel>
+                                <FormLabel>Registration Number *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="100" type="text" {...field} />
+                                    <Input placeholder="REG-12345678" type="text" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -287,10 +277,10 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_type"
+                        name="o_type"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Hospital Type *</FormLabel>
+                                <FormLabel>Organisation Type *</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
@@ -298,8 +288,9 @@ export default function HospitalProfileForm() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="public">Public / Government</SelectItem>
-                                        <SelectItem value="private">Private</SelectItem>
+                                        <SelectItem value="trust">Charitable Trust</SelectItem>
+                                        <SelectItem value="society">Registered Society</SelectItem>
+                                        <SelectItem value="foundation">Foundation</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -309,12 +300,12 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_website"
+                        name="o_website"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Hospital Website</FormLabel>
+                                <FormLabel>Organisation Website</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="https://abchospitals.com" type="text" {...field} />
+                                    <Input placeholder="https://hopebloodfoundation.org" type="text" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -323,7 +314,7 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_region"
+                        name="o_region"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Select Country *</FormLabel>
@@ -348,7 +339,7 @@ export default function HospitalProfileForm() {
                         <div className="col-span-6">
                             <FormField
                                 control={form.control}
-                                name="h_city"
+                                name="o_city"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>City *</FormLabel>
@@ -364,7 +355,7 @@ export default function HospitalProfileForm() {
                         <div className="col-span-6">
                             <FormField
                                 control={form.control}
-                                name="h_pincode"
+                                name="o_pincode"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Pin/Zip Code *</FormLabel>
@@ -378,65 +369,14 @@ export default function HospitalProfileForm() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-12 gap-4">
-                        <div className="col-span-6">
-                            <FormField
-                                control={form.control}
-                                name="h_lat"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Maps Latitude *</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="1.000000" type="text" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-
-                        <div className="col-span-6">
-                            <FormField
-                                control={form.control}
-                                name="h_lon"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Maps Longitude *</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="5.000000" type="text" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                    </div>
-
                     <FormField
                         control={form.control}
-                        name="h_phone"
+                        name="o_phone"
                         render={({ field }) => (
                             <FormItem className="flex flex-col items-start">
-                                <FormLabel>Hospital Phone *</FormLabel>
+                                <FormLabel>Contact Phone *</FormLabel>
                                 <FormControl className="w-full">
                                     <PhoneInput {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name="h_bloodbank_available"
-                        render={({ field }) => (
-                            <FormItem className="space-y-3">
-                                <FormLabel>Does the hospital have a blood bank? *</FormLabel>
-                                <FormControl>
-                                    <div className="flex items-center space-x-3">
-                                        <Switch checked={field.value === "yes"} onCheckedChange={(checked) => field.onChange(checked ? "yes" : "no")} />
-                                        <FormLabel className="font-normal">{field.value === "yes" ? "Yes" : "No"}</FormLabel>
-                                    </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -447,7 +387,7 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_admin_name"
+                        name="o_admin_name"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Admin Full Name *</FormLabel>
@@ -461,7 +401,7 @@ export default function HospitalProfileForm() {
 
                     <FormField
                         control={form.control}
-                        name="h_admin_phone"
+                        name="o_admin_phone"
                         render={({ field }) => (
                             <FormItem className="flex flex-col items-start">
                                 <FormLabel>Admin Phone *</FormLabel>
