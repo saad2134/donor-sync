@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
-import { useEffect } from "react";
 import { UserProvider, useUser } from "@/context/UserContext";
 import { SettingsProvider } from "@/context/SettingsContext";
 import { Toaster } from "@/components/ui/toaster"
