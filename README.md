@@ -1,4 +1,9 @@
-<h1 align="center"> 🩸 Donor Sync – Blood Bank Management System </h1>
+
+<h1 align="center">
+  <a href="https://github.com/saad2134/dosezy">
+    <img width="1440" height="310" alt="🩸 Donor Sync – Blood Bank Management System" src="https://github.com/user-attachments/assets/02940e8c-fea8-4ff1-923b-4c1b90fc6ec5" />
+ </a>
+</h1>
 
 > <p align="center"><strong>A comprehensive web-based platform that connects blood donors directly with hospitals, ensuring quick and efficient blood donation. It manages databases for donors, hospitals, and active donor organizations, streamlining the process and improving healthcare accessibility, with seamless connectivity between donors, patients, hospitals & organizations. 🎯</strong></p>
 
