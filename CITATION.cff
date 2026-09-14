@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, study, or project, please cite it as below."
+authors:
+  - family-names: "Mohammed"
+    given-names: "Saaduddin"
+  - family-names: "Owais"
+    given-names: "Fareed Ahmed"
+  - family-names: "Qasim"
+    given-names: "Abdur Rahman"
+  - family-names: "Mohammed"
+    given-names: "Abdul Rahman"
+title: "DonorSync"
+version: 1.1.0
+date-released: 2025-11-29
+repository-code: "https://github.com/saad2134/donor-sync"
+license: GPL-3.0

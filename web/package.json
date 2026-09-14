@@ -1,6 +1,7 @@
 {
   "name": "donor-sync",
   "version": "1.1.0",
+  "license": "GPL-3.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3050",

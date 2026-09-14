@@ -8,13 +8,21 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Missing user_json_url." }, { status: 400 });
         }
 
-        // Validate user_json_url to prevent Server-Side Request Forgery (SSRF)
+        // Validate and canonicalize user_json_url to prevent Server-Side Request Forgery (SSRF)
+        let safeUserJsonUrl: string;
         try {
             const parsedUrl = new URL(user_json_url);
-            const isValidDomain = parsedUrl.hostname === "phone.email" || parsedUrl.hostname.endsWith(".phone.email");
-            if (parsedUrl.protocol !== "https:" || !isValidDomain) {
+            const hostname = parsedUrl.hostname.toLowerCase();
+            const isValidDomain = hostname === "phone.email" || hostname.endsWith(".phone.email");
+            const hasInvalidPort = parsedUrl.port !== "" && parsedUrl.port !== "443";
+            const hasUnsafePath = parsedUrl.pathname.includes("..") || parsedUrl.pathname.includes("\\");
+
+            if (parsedUrl.protocol !== "https:" || !isValidDomain || hasInvalidPort || hasUnsafePath) {
                 return NextResponse.json({ error: "Invalid user_json_url domain." }, { status: 400 });
             }
+
+            // Rebuild canonical URL from validated components instead of using raw user input.
+            safeUserJsonUrl = `${parsedUrl.protocol}//${hostname}${parsedUrl.pathname}${parsedUrl.search}`;
         } catch (e) {
             return NextResponse.json({ error: "Invalid user_json_url format." }, { status: 400 });
         }
@@ -28,7 +36,7 @@ export async function POST(req: Request) {
         }
 
         // Fetch user details from the verification API
-        const response = await fetch(user_json_url, {
+        const response = await fetch(safeUserJsonUrl, {
             headers: {
                 "Authorization": `Bearer ${API_KEY}`,
                 "Content-Type": "application/json",
