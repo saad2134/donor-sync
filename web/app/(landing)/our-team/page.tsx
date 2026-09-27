@@ -25,7 +25,7 @@ export default function TeamPage() {
       linkedin: null
     },
     { 
-      name: "Mohammed Saaduddin", 
+      name: "Saad M.", 
       role: "🚀 Lead Full-stack & AI/ML Developer", 
       initials: "MS",
       github: "https://github.com/saad2134",
