@@ -29,7 +29,7 @@
 👥 Original Hack2innovate Team Members
 
 1. [**Fareed Ahmed Owais**](https://github.com/FareedAhmedOwais)
-2. [**Mohammed Saad Uddin**](https://github.com/saad2134)
+2. [**Saad M.**](https://github.com/saad2134)
 3. [**Abdur Rahman Qasim**](https://github.com/Abdur-rahman-01)
 4. [**Mohammed Abdul Rahman**](https://github.com/Abdul-Rahman26)
 
